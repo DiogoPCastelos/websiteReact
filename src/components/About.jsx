@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComputer } from "@fortawesome/free-solid-svg-icons";
+import { faComputer, faSailboat } from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -35,9 +35,9 @@ const About = () => {
         <p className="text-lg">
           Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 21-year-old
           Computer Engineering student from Évora, Portugal, currently pursuing
-          my <FontAwesomeIcon icon={faComputer} /> Engineering degree at the{" "}
-          <strong>NOVA University of Lisbon</strong>. Alongside my studies, I
-          work as a{" "}
+          my <FontAwesomeIcon color="purple" icon={faComputer} /> Engineering
+          degree at the <strong>NOVA University of Lisbon</strong>. Alongside my
+          studies, I work as a{" "}
           <strong>Full-Stack Mobile and Web Software Developer</strong> at{" "}
           <strong>
             Associação In-Nova - Consultoria Júnior da Nova School of Science
@@ -49,9 +49,10 @@ const About = () => {
           My passion lies in technology and software development, with a
           particular love for <strong>front-end development</strong>, where
           creativity meets functionality. Outside the tech world, I find
-          inspiration in <strong>sailing</strong>, <strong>debating</strong>,
-          and constantly seeking new challenges that push me to grow both
-          personally and professionally.
+          inspiration in <FontAwesomeIcon color="purple" icon={faSailboat} />{" "}
+          <strong>sailing</strong>, <strong>debating</strong>, and constantly
+          seeking new challenges that push me to grow both personally and
+          professionally.
         </p>
         <p className="text-lg">
           I’m actively looking for <strong>internships</strong> and{" "}

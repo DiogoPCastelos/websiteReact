@@ -1,12 +1,14 @@
 import { About, Projects, Contact } from "../components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReact } from "@fortawesome/free-solid-svg-icons";
 
 function Works() {
   const navigate = useNavigate();
-  const [about, setAbout] = useState(false);
-  const [projects, setProjects] = useState(false);
-  const [contact, setContact] = useState(false); // Add contact state
+  const [about, setAbout] = useState(true);
+  const [projects, setProjects] = useState(true);
+  const [contact, setContact] = useState(true); // Add contact state
 
   const aboutHandler = () => {
     setAbout(!about);
@@ -20,6 +22,12 @@ function Works() {
     setContact(!contact); // Toggle contact visibility
   };
 
+  const closeHandler = () => {
+    setAbout(false);
+    setProjects(false);
+    setContact(false); // Close all sections
+  };
+
   return (
     <div className="bg-background w-screen h-screen text-textPrimary">
       <nav className="flex flex-row h-[12vh] justify-between items-start bg-topbar text-textPrimary">
@@ -27,25 +35,37 @@ function Works() {
           src="/src/assets/images/ava.jpeg"
           alt="Logo"
           className="size-[12vh] p-2 rounded-[50%] ml-5 hover:rotate-360 transform-gpu transition-all duration-300"
-          onClick={() => mainButton()}
+          onClick={() => closeHandler()}
         />
         <div className="text-xl flex flex-row w-full h-full space-x-0 items-center justify-center text-textPrimary">
-          <div className="w-fit flex flex-row hover:text-red-500 h-full items-center justify-center">
+          <div className="w-fit flex flex-row h-full items-center justify-center">
             <button
               onClick={aboutHandler}
-              className="flex flex-col items-center justify-center h-full px-5 hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+              className={`flex flex-col items-center justify-center h-full px-5 hover:font-semibold transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5 ${
+                about
+                  ? "text-secondary hover:text-red-500 font-semibold"
+                  : "text-textPrimary hover:text-secondary "
+              }`}
             >
               About
             </button>
             <button
               onClick={projectsHandler}
-              className="flex flex-col items-center justify-center h-full px-5 hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+              className={`flex flex-col items-center justify-center h-full px-5 hover:font-semibold transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5 ${
+                projects
+                  ? "text-secondary hover:text-red-500 font-semibold"
+                  : "text-textPrimary hover:text-secondary "
+              }`}
             >
               Projects
             </button>
             <button
               onClick={contactHandler}
-              className="flex flex-col items-center justify-center h-full px-5 hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+              className={`flex flex-col items-center justify-center h-full px-5 hover:font-semibold transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5 ${
+                contact
+                  ? "text-secondary hover:text-red-500 font-semibold"
+                  : "text-textPrimary hover:text-secondary "
+              }`}
             >
               Contact
             </button>
@@ -99,7 +119,9 @@ function Works() {
           }`}
         >
           <div className="bg-gray-200 p-4 rounded">Other content here</div>
-          <div className="bg-gray-300 p-4 rounded">More content below</div>
+          <div className="bg-gray-300 p-4 rounded">
+            Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
+          </div>
         </div>
       </div>
     </div>
