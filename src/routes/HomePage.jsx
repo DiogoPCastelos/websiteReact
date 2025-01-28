@@ -89,27 +89,20 @@ function HomePage() {
         </div>
 
         {/* Other Sections */}
-        <div className="flex flex-col space-y-6 p-6 max-w-screen-lg mx-auto">
+        <div className="flex flex-col space-y-6 p-6 items-center max-w-screen mx-auto">
+          {/* Projects Section */}
+          <div className={`${about ? "" : "pt-[12vh]"} w-screen`}>
+            <Projects />
+          </div>
           {/* Contact Section */}
           <div
-            className={`transition-all duration-700 ${
+            className={`transition-all max-w-screen-lg duration-700 ${
               contact
                 ? "opacity-100 max-h-[100vh] py-4"
                 : "opacity-0 max-h-0 overflow-hidden"
             } ${about ? "" : "pt-[12vh]"} `}
           >
             <Contact />
-          </div>
-
-          {/* Projects Section */}
-          <div
-            className={`transition-all duration-700 ${
-              projects
-                ? "opacity-100 max-h-[100vh] py-4"
-                : "opacity-0 max-h-0 overflow-hidden"
-            }`}
-          >
-            <Projects />
           </div>
         </div>
       </div>

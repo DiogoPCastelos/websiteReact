@@ -105,7 +105,7 @@ const TechStack = () => {
         className="size-[6vh] object-contain"
       />
       <img
-        src="src/assets/images/react.png"
+        src="src/assets/images/react.svg"
         alt="react"
         className="size-[6vh] object-contain"
       />
