@@ -47,6 +47,7 @@ const Contact = () => {
         import.meta.env.VITE_EMAILJS_SERVICE_ID, // Service ID
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // Template ID
         {
+          to_name: "Diogo Castelos",
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,

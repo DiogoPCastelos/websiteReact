@@ -8,7 +8,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-function Works() {
+function HomePage() {
   const [about, setAbout] = useState(true);
   const [projects, setProjects] = useState(true);
   const [contact, setContact] = useState(true);
@@ -23,7 +23,7 @@ function Works() {
   return (
     <div className="relative bg-background min-h-screen text-textPrimary flex flex-col">
       {/* Topbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-6 backdrop-opacity-65 backdrop-blur-md">
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-6">
         <button
           onClick={() => {
             aboutHandler();
@@ -148,4 +148,4 @@ function Works() {
   );
 }
 
-export default Works;
+export default HomePage;
