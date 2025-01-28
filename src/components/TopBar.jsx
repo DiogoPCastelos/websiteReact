@@ -10,31 +10,33 @@ const TopBar = () => {
         className="size-[12vh] p-2 rounded-[50%] ml-5 hover:rotate-360 transform-gpu transition-all duration-300"
         onClick={() => navigate("/")}
       />
-      <div className="flex flex-row w-full h-full space-x-0 items-center justify-center">
-        <button
-          onClick={() => navigate("/about")}
-          className="flex flex-col items-center justify-center h-full px-5 hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
-        >
-          About
-        </button>
-        <button
-          onClick={() => navigate("/works")}
-          className="flex flex-col items-center justify-center h-full px-5 hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
-        >
-          Works
-        </button>
-        <button
-          onClick={() => navigate("/contact")}
-          className="flex flex-col items-center justify-center h-full px-5 hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
-        >
-          Contact
-        </button>
-        <button
-          onClick={() => navigate("/cv")}
-          className="flex flex-col items-center justify-center h-full px-5 hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
-        >
-          CV
-        </button>
+      <div className="flex flex-row w-full h-full space-x-0 items-center justify-center text-textPrimary">
+        <div className="w-fit flex flex-row hover:text-red-500 h-full items-center justify-center">
+          <button
+            onClick={() => navigate("/about")}
+            className="flex flex-col items-center justify-center h-full px-5 hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+          >
+            About
+          </button>
+          <button
+            onClick={() => navigate("/projects")}
+            className="flex flex-col items-center justify-center h-full px-5  hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => navigate("/contact")}
+            className="flex flex-col items-center justify-center h-full px-5  hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+          >
+            Contact
+          </button>
+          <button
+            onClick={() => navigate("/cv")}
+            className="flex flex-col items-center justify-center h-full px-5  hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
+          >
+            CV
+          </button>
+        </div>
       </div>
     </nav>
   );
