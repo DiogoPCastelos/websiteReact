@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComputer } from "@fortawesome/free-solid-svg-icons";
 
-const About = () => {
+const Projects = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleAbout = () => {
+  const toggleProjects = () => {
     setIsExpanded(!isExpanded);
   };
 
@@ -13,10 +13,10 @@ const About = () => {
     <div className="flex flex-col text-textPrimary bg-gray-100 rounded-3xl shadow-md overflow-hidden">
       {/* Always visible and clickable title */}
       <div
-        onClick={toggleAbout}
+        onClick={toggleProjects}
         className="cursor-pointer bg-gray-200 p-4 rounded-t-3xl flex justify-between items-center hover:bg-gray-300 transition"
       >
-        <h2 className="text-2xl font-bold">About Me</h2>
+        <h2 className="text-2xl font-bold">Projects Me</h2>
         <span
           className={`text-lg transition-transform ${
             isExpanded ? "rotate-180" : "rotate-0"
@@ -66,4 +66,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Projects;

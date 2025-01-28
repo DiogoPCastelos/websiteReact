@@ -2,7 +2,14 @@ import { About, Projects, Contact } from "../components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReact } from "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/free-regular-svg-icons";
+import {
+  faReact,
+  faLinkedin,
+  faGithub,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 function Works() {
   const navigate = useNavigate();
@@ -29,7 +36,7 @@ function Works() {
   };
 
   return (
-    <div className="bg-background w-screen h-screen text-textPrimary">
+    <div className="bg-background w-screen h-screen text-textPrimary overflow-x-hidden">
       <nav className="flex flex-row h-[12vh] justify-between items-start bg-topbar text-textPrimary">
         <img
           src="/src/assets/images/ava.jpeg"
@@ -78,10 +85,10 @@ function Works() {
           </div>
         </div>
       </nav>
-      <div className="flex flex-col space-y-6 border-y-6 border-x-8 px-2 py-6 border-background w-screen h-fit">
+      <div className="flex flex-col space-y-6 border-y-6 border-x-8 px-2 py-6 border-background max-w-screen h-fit overflow-x-hidden">
         {/* Animated About Section */}
         <div
-          className={`transition-all duration-700 ease-in-out ${
+          className={`overflow-x-hidden transition-all duration-700 ease-in-out ${
             about
               ? "opacity-100 max-h-[100vh] py-4"
               : "opacity-0 max-h-0 py-0 overflow-hidden"
@@ -106,7 +113,7 @@ function Works() {
           className={`transition-all duration-700 ease-in-out ${
             contact
               ? "opacity-100 max-h-[100vh] py-4"
-              : "opacity-0 max-h-0 py-0 overflow-hidden"
+              : "opacity-0 max-h-0 py-0 overflow-x-hidden"
           }`}
         >
           <Contact />
@@ -118,8 +125,12 @@ function Works() {
             about || projects || contact ? "mt-4" : "mt-0"
           }`}
         >
-          <div className="bg-gray-200 p-4 rounded">Other content here</div>
-          <div className="bg-gray-300 p-4 rounded">
+          <div className="bg-background h-fit border-b-8 border-background p-4 rounded flex flex-row justify-evenly">
+            <FontAwesomeIcon size="3x" icon={faLinkedin} />
+            <FontAwesomeIcon size="3x" icon={faGithub} />
+            <FontAwesomeIcon size="3x" icon={faInstagram} />
+          </div>
+          <div className="bg-gray-300 h-fit rounded">
             Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
           </div>
         </div>
