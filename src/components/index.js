@@ -1,5 +1,7 @@
 //Imports
-import TopBar from "./TopBar";
+import About from "./About";
+import Projects from "./Projects";
+import Contact from "./Contact";
 
 //Exports
-export { TopBar };
+export { Contact, About, Projects };
