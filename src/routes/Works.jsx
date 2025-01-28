@@ -1,9 +1,6 @@
 import { About, Projects, Contact } from "../components";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/free-regular-svg-icons";
 import {
   faReact,
   faLinkedin,
@@ -12,125 +9,128 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 function Works() {
-  const navigate = useNavigate();
   const [about, setAbout] = useState(true);
   const [projects, setProjects] = useState(true);
-  const [contact, setContact] = useState(true); // Add contact state
+  const [contact, setContact] = useState(true);
 
-  const aboutHandler = () => {
-    setAbout(!about);
-  };
-
-  const projectsHandler = () => {
-    setProjects(!projects);
-  };
-
-  const contactHandler = () => {
-    setContact(!contact); // Toggle contact visibility
-  };
-
-  const closeHandler = () => {
-    setAbout(false);
-    setProjects(false);
-    setContact(false); // Close all sections
-  };
+  const aboutHandler = () => setAbout(!about);
+  const projectsHandler = () => setProjects(!projects);
+  const contactHandler = () => setContact(!contact);
 
   return (
-    <div className="bg-background w-screen h-screen text-textPrimary overflow-x-hidden">
-      <nav className="flex flex-row h-[12vh] justify-between items-start bg-topbar text-textPrimary">
-        <img
-          src="/src/assets/images/ava.jpeg"
-          alt="Logo"
-          className="size-[12vh] p-2 rounded-[50%] ml-5 hover:rotate-360 transform-gpu transition-all duration-300"
-          onClick={() => closeHandler()}
-        />
-        <div className="text-xl flex flex-row w-full h-full space-x-0 items-center justify-center text-textPrimary">
-          <div className="w-fit flex flex-row h-full items-center justify-center">
-            <button
-              onClick={aboutHandler}
-              className={`flex flex-col items-center justify-center h-full px-5 hover:font-semibold transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5 ${
-                about
-                  ? "text-secondary hover:text-red-500 font-semibold"
-                  : "text-textPrimary hover:text-secondary "
-              }`}
-            >
-              About
-            </button>
-            <button
-              onClick={projectsHandler}
-              className={`flex flex-col items-center justify-center h-full px-5 hover:font-semibold transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5 ${
-                projects
-                  ? "text-secondary hover:text-red-500 font-semibold"
-                  : "text-textPrimary hover:text-secondary "
-              }`}
-            >
-              Projects
-            </button>
-            <button
-              onClick={contactHandler}
-              className={`flex flex-col items-center justify-center h-full px-5 hover:font-semibold transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5 ${
-                contact
-                  ? "text-secondary hover:text-red-500 font-semibold"
-                  : "text-textPrimary hover:text-secondary "
-              }`}
-            >
-              Contact
-            </button>
-            <button
-              onClick={() => navigate("/cv")}
-              className="flex flex-col items-center justify-center h-full px-5 hover:font-semibold hover:text-secondary transition-scale duration-300 hover:scale-125 transform-gpu hover:-translate-y-2.5"
-            >
-              CV
-            </button>
-          </div>
-        </div>
-      </nav>
-      <div className="flex flex-col space-y-6 border-y-6 border-x-8 px-2 py-6 border-background max-w-screen h-fit overflow-x-hidden">
-        {/* Animated About Section */}
-        <div
-          className={`overflow-x-hidden transition-all duration-700 ease-in-out ${
+    <div className="relative bg-background h-screen text-textPrimary overflow-x-hidden">
+      {/* Topbar */}
+      <nav className="absolute top-0 left-0 w-full z-50 flex justify-between items-center backdrop-opacity-65 text-white h-[12vh] px-6">
+        {/* Logo */}
+        <button
+          onClick={aboutHandler}
+          className={`hover:font-semibold transition-transform duration-300 ${
             about
-              ? "opacity-100 max-h-[100vh] py-4"
-              : "opacity-0 max-h-0 py-0 overflow-hidden"
+              ? "text-secondary font-semibold"
+              : "text-textPrimary hover:text-secondary"
           }`}
         >
-          <About />
+          <img
+            src="/src/assets/images/ava.jpeg"
+            alt="Logo"
+            className="h-[8vh] rounded-full hover:rotate-360 transform-gpu transition-transform duration-300"
+          />
+        </button>
+
+        {/* Navigation Buttons */}
+        <div className="flex space-x-6">
+          <button
+            onClick={contactHandler}
+            className={`hover:font-semibold transition-transform duration-300 ${
+              contact
+                ? "text-secondary font-semibold"
+                : "text-textPrimary hover:text-secondary"
+            }`}
+          >
+            Contact
+          </button>
+          <button
+            onClick={projectsHandler}
+            className={`hover:font-semibold transition-transform duration-300 ${
+              projects
+                ? "text-secondary font-semibold"
+                : "text-textPrimary hover:text-secondary"
+            }`}
+          >
+            Projects
+          </button>
+          <a
+            href="src/assets/CV - Diogo Piteira Castelos.pdf"
+            download
+            className="hover:font-semibold hover:text-secondary transition-transform duration-300"
+          >
+            CV
+          </a>
+        </div>
+      </nav>
+
+      {/* About Section */}
+      <div
+        className={`transition-all duration-700 ease-in-out ${
+          about
+            ? "opacity-100 max-h-[100vh]"
+            : "opacity-0 max-h-0 overflow-hidden"
+        }`}
+      >
+        <About />
+      </div>
+
+      {/* Other Sections */}
+      <div className="flex flex-col space-y-6 p-6 max-w-screen-lg mx-auto">
+        {/* Contact Section */}
+        <div
+          className={`transition-all duration-700 ${
+            contact
+              ? "opacity-100 max-h-[100vh] py-4"
+              : "opacity-0 max-h-0 overflow-hidden"
+          } ${about ? "" : "pt-[12vh]"} `}
+        >
+          <Contact />
         </div>
 
-        {/* Animated Projects Section */}
+        {/* Projects Section */}
         <div
-          className={`transition-all duration-700 ease-in-out ${
+          className={`transition-all duration-700 ${
             projects
               ? "opacity-100 max-h-[100vh] py-4"
-              : "opacity-0 max-h-0 py-0 overflow-hidden"
+              : "opacity-0 max-h-0 overflow-hidden"
           }`}
         >
           <Projects />
         </div>
 
-        {/* Animated Contact Section */}
-        <div
-          className={`transition-all duration-700 ease-in-out ${
-            contact
-              ? "opacity-100 max-h-[100vh] py-4"
-              : "opacity-0 max-h-0 py-0 overflow-x-hidden"
-          }`}
-        >
-          <Contact />
-        </div>
-
-        {/* Other content will animate position to follow the About, Projects, and Contact sections */}
-        <div
-          className={`transition-all duration-700 ease-in-out ${
-            about || projects || contact ? "mt-4" : "mt-0"
-          }`}
-        >
-          <div className="bg-background h-fit border-b-8 border-background p-4 rounded flex flex-row justify-evenly">
-            <FontAwesomeIcon size="3x" icon={faLinkedin} />
-            <FontAwesomeIcon size="3x" icon={faGithub} />
-            <FontAwesomeIcon size="3x" icon={faInstagram} />
+        {/* Footer */}
+        <div className="flex flex-col items-center space-y-4">
+          <div className="flex space-x-6">
+            <FontAwesomeIcon
+              size="3x"
+              icon={faLinkedin}
+              onClick={() =>
+                window.open("https://www.linkedin.com/in/diogopcastelos/")
+              }
+              className="cursor-pointer hover:text-secondary"
+            />
+            <FontAwesomeIcon
+              size="3x"
+              icon={faGithub}
+              onClick={() => window.open("https://github.com/DiogoPCastelos/")}
+              className="cursor-pointer hover:text-secondary"
+            />
+            <FontAwesomeIcon
+              size="3x"
+              icon={faInstagram}
+              onClick={() =>
+                window.open("https://www.instagram.com/diogopcastelos/")
+              }
+              className="cursor-pointer hover:text-secondary"
+            />
           </div>
-          <div className="bg-gray-300 h-fit rounded">
+          <div className="text-sm text-gray-400">
             Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
           </div>
         </div>

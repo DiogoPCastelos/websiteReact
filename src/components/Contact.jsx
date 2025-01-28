@@ -76,12 +76,14 @@ const Contact = () => {
       {/* Always visible and clickable title */}
       <div
         onClick={toggleContact}
-        className="cursor-pointer bg-gray-200 p-4 rounded-t-3xl flex justify-between items-center hover:bg-gray-300 transition"
+        className="cursor-pointer bg-gray-200 p-4 rounded-t-3xl flex justify-between items-center hover:bg-gray-300 transition group"
       >
         <h2 className="text-2xl font-bold">Contact Me</h2>
         <span
           className={`text-lg transition-transform ${
-            isExpanded ? "rotate-180" : "rotate-0"
+            isExpanded
+              ? "rotate-180 group-hover:text-red-400"
+              : "rotate-0 group-hover:text-green-400"
           }`}
         >
           ▼
@@ -151,7 +153,7 @@ const Contact = () => {
           <button
             type="submit"
             className={`${
-              isWaiting ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+              isWaiting ? "bg-gray-400" : "bg-secondary hover:bg-primary"
             } text-white px-4 py-2 rounded transition`}
             disabled={isWaiting}
           >
