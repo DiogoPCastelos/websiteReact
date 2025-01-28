@@ -116,6 +116,11 @@ const About = () => {
             className="size-[6vh] object-contain"
           />
           <img
+            src="src/assets/images/react.png"
+            alt="react"
+            className="size-[6vh] object-contain"
+          />
+          <img
             src="src/assets/images/spring.png"
             alt="springboot"
             className="size-[6vh] object-contain"
@@ -123,6 +128,11 @@ const About = () => {
           <img
             src="src/assets/images/tailwind.png"
             alt="tailwind"
+            className="size-[6vh] object-contain"
+          />
+          <img
+            src="src/assets/images/vite.svg"
+            alt="vite"
             className="size-[6vh] object-contain"
           />
         </div>

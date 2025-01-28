@@ -12,10 +12,13 @@ function Works() {
   const [about, setAbout] = useState(true);
   const [projects, setProjects] = useState(true);
   const [contact, setContact] = useState(true);
+  const [rotateAva, setRotateAva] = useState(false); // State to handle avatar rotation
 
   const aboutHandler = () => setAbout(!about);
   const projectsHandler = () => setProjects(!projects);
   const contactHandler = () => setContact(!contact);
+
+  const rotateAvaHandler = () => setRotateAva(!rotateAva); // Toggle avatar rotation
 
   return (
     <div className="relative bg-background h-screen text-textPrimary overflow-x-hidden">
@@ -23,7 +26,10 @@ function Works() {
       <nav className="absolute top-0 left-0 w-full z-50 flex justify-between items-center backdrop-opacity-65 text-white h-[12vh] px-6">
         {/* Logo */}
         <button
-          onClick={aboutHandler}
+          onClick={() => {
+            aboutHandler();
+            rotateAvaHandler(); // Rotate avatar on click
+          }}
           className={`hover:font-semibold transition-transform duration-300 ${
             about
               ? "text-secondary font-semibold"
@@ -33,7 +39,9 @@ function Works() {
           <img
             src="/src/assets/images/ava.jpeg"
             alt="Logo"
-            className="h-[8vh] rounded-full hover:rotate-360 transform-gpu transition-transform duration-300"
+            className={`h-[8vh] rounded-full transform-gpu transition-transform duration-800 ${
+              rotateAva ? "-rotate-360" : ""
+            }`}
           />
         </button>
 
