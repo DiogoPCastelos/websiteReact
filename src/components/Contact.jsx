@@ -93,7 +93,7 @@ const Contact = () => {
 
       {/* Collapsible content */}
       <div
-        className={`transition-all duration-500 ease-in-out ${
+        className={`transition-all duration-600 ease-in-out ${
           isExpanded ? "max-h-[100vh] p-6" : "max-h-0 p-0"
         } overflow-hidden`}
       >

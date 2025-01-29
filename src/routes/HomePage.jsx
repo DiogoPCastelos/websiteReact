@@ -1,5 +1,5 @@
+import { useState, useRef } from "react";
 import { About, Projects, Contact } from "../components";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faReact,
@@ -10,15 +10,22 @@ import {
 
 function HomePage() {
   const [about, setAbout] = useState(true);
-  const [projects, setProjects] = useState(true);
-  const [contact, setContact] = useState(true);
-  const [rotateAva, setRotateAva] = useState(false); // State to handle avatar rotation
+  const [rotateAva, setRotateAva] = useState(false);
 
+  // References to Projects and Contact sections
+  const projectsRef = useRef(null);
+  const contactRef = useRef(null);
+
+  // Handlers to toggle visibility
   const aboutHandler = () => setAbout(!about);
-  const projectsHandler = () => setProjects(!projects);
-  const contactHandler = () => setContact(!contact);
+  const projectsHandler = () => {
+    projectsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  const contactHandler = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
-  const rotateAvaHandler = () => setRotateAva(!rotateAva); // Toggle avatar rotation
+  const rotateAvaHandler = () => setRotateAva(!rotateAva);
 
   return (
     <div className="relative bg-background min-h-screen text-textPrimary flex flex-col">
@@ -27,7 +34,7 @@ function HomePage() {
         <button
           onClick={() => {
             aboutHandler();
-            rotateAvaHandler(); // Rotate avatar on click
+            rotateAvaHandler();
           }}
           className={`hover:font-semibold transition-transform duration-300 ${
             about
@@ -46,29 +53,21 @@ function HomePage() {
 
         <div className="flex space-x-6">
           <button
-            onClick={contactHandler}
-            className={`hover:font-semibold transition-transform duration-300 ${
-              contact
-                ? "text-secondary font-semibold"
-                : "text-textPrimary hover:text-secondary"
-            }`}
-          >
-            Contact
-          </button>
-          <button
             onClick={projectsHandler}
-            className={`hover:font-semibold transition-transform duration-300 ${
-              projects
-                ? "text-secondary font-semibold"
-                : "text-textPrimary hover:text-secondary"
-            }`}
+            className="hover:font-bold  transition-transform duration-300 text-secondary font-semibold hover:text-purple-100"
           >
             Projects
+          </button>
+          <button
+            onClick={contactHandler}
+            className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-purple-100"
+          >
+            Contact
           </button>
           <a
             href="src/assets/CV - Diogo Piteira Castelos.pdf"
             download
-            className="hover:font-semibold hover:text-secondary transition-transform duration-300"
+            className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-green-500"
           >
             CV
           </a>
@@ -91,16 +90,18 @@ function HomePage() {
         {/* Other Sections */}
         <div className="flex flex-col space-y-6 p-6 items-center max-w-screen mx-auto">
           {/* Projects Section */}
-          <div className={`${about ? "" : "pt-[12vh]"} w-screen`}>
+          <div
+            ref={projectsRef}
+            className={`${about ? "" : "pt-[12vh]"} w-screen`}
+          >
             <Projects />
           </div>
           {/* Contact Section */}
           <div
-            className={`transition-all max-w-screen-lg duration-700 ${
-              contact
-                ? "opacity-100 max-h-[100vh] py-4"
-                : "opacity-0 max-h-0 overflow-hidden"
-            } ${about ? "" : "pt-[12vh]"} `}
+            ref={contactRef}
+            className={`transition-all max-w-screen-lg duration-700 opacity-100 max-h-[100vh] py-4 ${
+              about ? "" : "pt-[12vh]"
+            } `}
           >
             <Contact />
           </div>
@@ -112,6 +113,7 @@ function HomePage() {
         <div className="flex justify-center space-x-6 mb-2">
           <FontAwesomeIcon
             size="3x"
+            color="white"
             icon={faLinkedin}
             onClick={() =>
               window.open("https://www.linkedin.com/in/diogopcastelos/")
@@ -120,12 +122,14 @@ function HomePage() {
           />
           <FontAwesomeIcon
             size="3x"
+            color="white"
             icon={faGithub}
             onClick={() => window.open("https://github.com/DiogoPCastelos/")}
             className="cursor-pointer hover:text-secondary"
           />
           <FontAwesomeIcon
             size="3x"
+            color="white"
             icon={faInstagram}
             onClick={() =>
               window.open("https://www.instagram.com/diogopcastelos/")

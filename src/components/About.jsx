@@ -30,11 +30,7 @@ const About = () => {
           degree at the <strong>NOVA University of Lisbon</strong>. Alongside my
           studies, I work as a{" "}
           <strong>Full-Stack Mobile and Web Software Developer</strong> at{" "}
-          <strong>
-            Associação In-Nova - Consultoria Júnior da Nova School of Science
-            and Technology
-          </strong>
-          .
+          <strong>In-Nova</strong>.
         </p>
         <p className="text-lg mt-4">
           My passion lies in technology and software development, with a
@@ -50,6 +46,10 @@ const About = () => {
           <strong>job opportunities</strong> in software development, eager to
           contribute, learn, and innovate in dynamic and collaborative
           environments.
+        </p>
+        <p className="text-lg mt-4">
+          Native in <strong>Portuguese</strong> and <strong>English</strong>{" "}
+          fluent in <strong>Spanish</strong> and <strong>French</strong>.
         </p>
       </div>
     </div>
