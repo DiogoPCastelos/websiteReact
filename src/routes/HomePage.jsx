@@ -143,6 +143,44 @@ function HomePage() {
         </div>
 
         {/* License Section */}
+        <div className="flex pt-2 flex-row justify-center">
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+            alt="CC"
+          />
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+            alt="BY"
+          />
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+            alt="NC"
+          />
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+            alt="SA"
+          />
+        </div>
         <div className="text-sm text-gray-500">
           <p>
             <a
@@ -170,44 +208,6 @@ function HomePage() {
               className="hover:text-secondary inline-block"
             >
               CC BY-NC-SA 4.0
-              <div className="flex flex-row">
-                <img
-                  style={{
-                    height: "22px",
-                    marginLeft: "3px",
-                    verticalAlign: "text-bottom",
-                  }}
-                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
-                  alt="CC"
-                />
-                <img
-                  style={{
-                    height: "22px",
-                    marginLeft: "3px",
-                    verticalAlign: "text-bottom",
-                  }}
-                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
-                  alt="BY"
-                />
-                <img
-                  style={{
-                    height: "22px",
-                    marginLeft: "3px",
-                    verticalAlign: "text-bottom",
-                  }}
-                  src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
-                  alt="NC"
-                />
-                <img
-                  style={{
-                    height: "22px",
-                    marginLeft: "3px",
-                    verticalAlign: "text-bottom",
-                  }}
-                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
-                  alt="SA"
-                />
-              </div>
             </a>
           </p>
         </div>
