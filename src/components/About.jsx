@@ -1,6 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TechStack from "./TechStack";
-import { faComputer, faSailboat } from "@fortawesome/free-solid-svg-icons";
+import {
+  faComputer,
+  faMicrophone,
+  faSailboat,
+} from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
   return (
@@ -26,7 +30,7 @@ const About = () => {
         <p className="text-lg">
           Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 21-year-old
           Computer Engineering student from Évora, Portugal, currently pursuing
-          my <FontAwesomeIcon icon={faComputer} color="purple" /> Engineering
+          my <FontAwesomeIcon icon={faComputer} color="grey" /> Engineering
           degree at the <strong>NOVA University of Lisbon</strong>. Alongside my
           studies, I work as a{" "}
           <strong>Full-Stack Mobile and Web Software Developer</strong> at{" "}
@@ -36,20 +40,21 @@ const About = () => {
           My passion lies in technology and software development, with a
           particular love for <strong>front-end development</strong>, where
           creativity meets functionality. Outside the tech world, I find
-          inspiration in <FontAwesomeIcon icon={faSailboat} color="purple" />{" "}
-          <strong>sailing</strong>, <strong>debating</strong>, and constantly
-          seeking new challenges that push me to grow both personally and
-          professionally.
+          inspiration in <FontAwesomeIcon icon={faSailboat} color="white" />{" "}
+          <strong>sailing</strong>,{" "}
+          <FontAwesomeIcon icon={faMicrophone} color="white" />{" "}
+          <strong>debating</strong>, and constantly seeking new challenges that
+          push me to grow both personally and professionally.
+        </p>
+        <p className="text-lg mt-4">
+          Native in <strong>Portuguese</strong> and <strong>English</strong>{" "}
+          fluent in <strong>Spanish</strong> and <strong>French</strong>.
         </p>
         <p className="text-lg mt-4">
           I’m actively looking for <strong>internships</strong> and{" "}
           <strong>job opportunities</strong> in software development, eager to
           contribute, learn, and innovate in dynamic and collaborative
           environments.
-        </p>
-        <p className="text-lg mt-4">
-          Native in <strong>Portuguese</strong> and <strong>English</strong>{" "}
-          fluent in <strong>Spanish</strong> and <strong>French</strong>.
         </p>
       </div>
     </div>
