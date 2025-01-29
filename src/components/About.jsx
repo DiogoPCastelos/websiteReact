@@ -13,7 +13,7 @@ const About = () => {
     <div
       className="relative w-full h-[100vh] flex bg-cover bg-center"
       style={{
-        backgroundImage: `url('${baseURL}images/stars.jpg')`, // Updated path
+        backgroundImage: `url('${baseURL}images/stars.webp')`, // Updated path
       }}
     >
       {/* Left Side: Content */}
