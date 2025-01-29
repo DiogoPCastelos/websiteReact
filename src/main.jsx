@@ -4,9 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import HomePage from "./routes/HomePage";
 
-const router = createBrowserRouter([
-  { path: "/websiteReact/", element: <HomePage /> },
-]);
+const router = createBrowserRouter([{ path: "/", element: <HomePage /> }]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
