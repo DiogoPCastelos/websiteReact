@@ -7,7 +7,7 @@ import HomePage from "./routes/HomePage";
 // Add the `basename` for deployment under /websiteReact
 const router = createBrowserRouter(
   [{ path: "/", element: <HomePage /> }],
-  { basename: "/websiteReact" } // This is where you set the base path
+  { basename: "" } // This is where you set the base path
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
