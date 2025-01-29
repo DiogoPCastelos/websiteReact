@@ -52,8 +52,9 @@ const projectsData = [
 ];
 
 const Projects = () => {
-  const [openProjects, setOpenProjects] = useState({});
   const baseURL = import.meta.env.BASE_URL;
+
+  const [openProjects, setOpenProjects] = useState({});
 
   const toggleProject = (id) => {
     setOpenProjects((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -70,7 +71,7 @@ const Projects = () => {
           <div
             className="absolute inset-0 bg-cover bg-center before:absolute before:inset-0 before:bg-cover before:bg-center before:backdrop-blur-lg before:content-['']"
             style={{
-              backgroundImage: `url(${baseURL}${project.photo})`, // Updated path
+              backgroundImage: `url(${baseURL}${project.photo})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -84,18 +85,38 @@ const Projects = () => {
               className="flex justify-between items-center cursor-pointer w-full p-4"
               onClick={() => toggleProject(project.id)}
             >
+              {/* Left Side: Project Name */}
               <div className="flex items-center">
                 <h2 className="text-xl font-bold text-white">{project.name}</h2>
+                {/* Tech Stack Icons (6vh to the right of name) */}
                 <div className="flex space-x-2 ml-[2vh]">
                   {project.tech.map((icon, index) => (
                     <img
                       key={index}
-                      src={`${baseURL}images/${icon}`} // Updated path
+                      src={`${baseURL}images/${icon}`}
                       alt={icon}
                       className="h-[4vh] w-[4vh] object-contain"
                     />
                   ))}
                 </div>
+              </div>
+
+              {/* Right Side: Arrow Indicator */}
+              <div className="flex flex-row items-center space-x-2">
+                <FontAwesomeIcon
+                  icon={faGlobe}
+                  onClick={() => window.open(project.link)}
+                  className="z-50 h-[4vh] w-[4vh] text-white cursor-pointer"
+                />
+                <span
+                  className={`text-lg transition-transform duration-300 ${
+                    openProjects[project.id]
+                      ? "rotate-180 group-hover:text-red-400"
+                      : "rotate-0 group-hover:text-green-400"
+                  }`}
+                >
+                  ▼
+                </span>
               </div>
             </div>
 
