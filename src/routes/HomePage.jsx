@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 function HomePage() {
+  const baseURL = import.meta.env.BASE_URL;
   const [about, setAbout] = useState(true);
   const [rotateAva, setRotateAva] = useState(false);
 
@@ -43,7 +44,7 @@ function HomePage() {
           }`}
         >
           <img
-            src="/src/assets/images/ava.jpeg"
+            src={`${baseURL}/images/ava.jpeg`}
             alt="Logo"
             className={`h-[8vh] rounded-full transform-gpu transition-transform duration-300 ${
               rotateAva ? "rotate-360" : ""
@@ -65,7 +66,7 @@ function HomePage() {
             Contact
           </button>
           <a
-            href="/src/CV - Diogo Piteira Castelos.pdf"
+            href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
             download
             className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-green-500"
           >

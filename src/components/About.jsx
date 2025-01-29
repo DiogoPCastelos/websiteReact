@@ -7,11 +7,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
+  const baseURL = import.meta.env.BASE_URL;
+
   return (
     <div
       className="relative w-full h-[100vh] flex bg-cover bg-center"
       style={{
-        backgroundImage: "url('src/assets/images/stars.jpg')",
+        backgroundImage: `url('${baseURL}images/stars.jpg')`, // Updated path
       }}
     >
       {/* Left Side: Content */}
@@ -25,7 +27,6 @@ const About = () => {
       </div>
 
       {/* Right Side: Name and Occupation */}
-
       <div className="flex-1 flex flex-col justify-center p-10 text-white">
         <p className="text-lg">
           Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 21-year-old
