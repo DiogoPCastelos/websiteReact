@@ -1,5 +1,4 @@
-import { useState, useRef } from "react";
-import { About, Projects, Contact } from "../components";
+import { useState, useRef, lazy, Suspense, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faReact,
@@ -9,67 +8,61 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Lazy Load Components
+const About = lazy(() => import("../components/About"));
+const Projects = lazy(() => import("../components/Projects"));
+const Contact = lazy(() => import("../components/Contact"));
+
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
-  const [about, setAbout] = useState(true);
-  const [direction, setDirection] = useState(true);
-  // References to Projects and Contact sections
+  const [aboutVisible, setAboutVisible] = useState(true);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
-
-  // Handlers to toggle visibility
-  const aboutHandler = () => {
-    setAbout(!about);
-    setDirection(!direction);
-  };
-  const projectsHandler = () => {
-    projectsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-  const contactHandler = () => {
-    contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   const [rotation, setRotation] = useState(0);
 
-  const rotateAvaHandler = () => {
-    direction ? setRotation(rotation - 360) : setRotation(rotation + 360);
-  };
+  // Scroll handlers
+  const scrollToSection = useCallback((ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  // Toggle About section & rotate avatar
+  const toggleAboutSection = useCallback(() => {
+    setAboutVisible((prev) => !prev);
+    setRotation((prev) => prev - 360);
+  }, []);
 
   return (
-    <div className="relative bg-background min-h-screen text-textPrimary flex flex-col">
+    <div className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 min-h-screen text-textPrimary flex flex-col">
       {/* Topbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-6">
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-8 backdrop-blur-xl bg-opacity-10">
         <motion.button
-          animate={{ rotate: rotation + 360 }}
-          transition={{ duration: 1 }}
-          onClick={() => {
-            aboutHandler();
-            rotateAvaHandler();
-          }}
+          animate={{ rotate: rotation }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          onClick={toggleAboutSection}
         >
           <img
             src={`${baseURL}images/ava.jpeg`}
             alt="Logo"
-            className="h-[8vh] rounded-full"
+            className="h-[8vh] rounded-full shadow-lg"
           />
         </motion.button>
-        <div className="flex space-x-6">
+        <div className="flex space-x-6 text-lg font-medium">
           <button
-            onClick={projectsHandler}
-            className="hover:font-bold transition-transform duration-300 text-secondary font-semibold hover:text-purple-100"
+            onClick={() => scrollToSection(projectsRef)}
+            className="nav-button"
           >
             Projects
           </button>
           <button
-            onClick={contactHandler}
-            className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-purple-100"
+            onClick={() => scrollToSection(contactRef)}
+            className="nav-button"
           >
             Contact
           </button>
           <a
             href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
             download
-            className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-green-500"
+            className="nav-button hover:text-green-500"
           >
             CV
           </a>
@@ -80,46 +73,67 @@ function HomePage() {
       <div className="flex-1 overflow-x-hidden">
         {/* About Section */}
         <AnimatePresence>
-          {about && (
+          {aboutVisible && (
             <motion.div
               initial={{ opacity: 0, y: 0, maxHeight: 0 }}
-              animate={{
-                opacity: 1,
-                y: about ? "0" : "-100",
-                maxHeight: "100vh",
-              }}
+              animate={{ opacity: 1, y: 0, maxHeight: "100vh" }}
               exit={{ opacity: 0, y: 0, maxHeight: 0 }}
-              transition={{ duration: 1, ease: "easeInOut", bounce: 100 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
               className="overflow-hidden"
             >
-              <About />
+              <Suspense
+                fallback={
+                  <div className="text-center text-gray-400">
+                    Loading About...
+                  </div>
+                }
+              >
+                <About />
+              </Suspense>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Other Sections */}
-        <div className="flex flex-col space-y-6 items-center max-w-screen mx-auto">
+        <div className="flex flex-col space-y-12 items-center max-w-6xl mx-auto">
           {/* Projects Section */}
           <motion.div
-            animate={{ paddingTop: about ? "0" : "12vh" }}
+            animate={{ paddingTop: aboutVisible ? "12vh" : "24vh" }}
             transition={{ duration: 1.3 }}
             ref={projectsRef}
-            className="w-screen"
+            className="w-full"
           >
-            <Projects />
+            <Suspense
+              fallback={
+                <div className="text-center text-gray-400">
+                  Loading Projects...
+                </div>
+              }
+            >
+              <Projects />
+            </Suspense>
           </motion.div>
+
           {/* Contact Section */}
           <div
             ref={contactRef}
             className="max-w-screen-lg opacity-100 max-h-[100vh] py-4"
           >
-            <Contact />
+            <Suspense
+              fallback={
+                <div className="text-center text-gray-400">
+                  Loading Contact...
+                </div>
+              }
+            >
+              <Contact />
+            </Suspense>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="bg-background text-center py-4">
+      <footer className="text-center py-4">
         <div className="flex justify-center space-x-6 mb-2">
           <FontAwesomeIcon
             size="3x"
@@ -146,10 +160,6 @@ function HomePage() {
             }
             className="cursor-pointer hover:text-secondary"
           />
-        </div>
-
-        <div className="text-sm text-gray-400">
-          Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
         </div>
 
         {/* License Section */}
@@ -220,6 +230,9 @@ function HomePage() {
               CC BY-NC-SA 4.0
             </a>
           </p>
+        </div>
+        <div className="text-sm text-gray-400">
+          Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
         </div>
       </footer>
     </div>
