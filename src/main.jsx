@@ -4,7 +4,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import HomePage from "./routes/HomePage";
 
-const router = createBrowserRouter([{ path: "/", element: <HomePage /> }]);
+// Add the `basename` for deployment under /websiteReact
+const router = createBrowserRouter(
+  [{ path: "/", element: <HomePage /> }],
+  { basename: "/websiteReact" } // This is where you set the base path
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
