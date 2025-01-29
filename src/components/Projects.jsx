@@ -35,7 +35,7 @@ const projectsData = [
     name: "The website you're visiting now.",
     description:
       "Designed in Figma, brought to life using Vite, React, and Tailwind. Timestamp 24h from 1st functionality and most of the website was already done as I challenged myself to make a website in 24h.",
-    link: "",
+    link: "https://github.com/DiogoPCastelos/websiteReact",
     tech: [
       "react.svg",
       "js.svg",
