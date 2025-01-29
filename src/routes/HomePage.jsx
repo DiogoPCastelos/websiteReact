@@ -65,7 +65,7 @@ function HomePage() {
             Contact
           </button>
           <a
-            href="src/assets/CV - Diogo Piteira Castelos.pdf"
+            href="/src/CV - Diogo Piteira Castelos.pdf"
             download
             className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-green-500"
           >
