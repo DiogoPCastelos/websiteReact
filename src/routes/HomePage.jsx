@@ -54,7 +54,7 @@ function HomePage() {
         <div className="flex space-x-6">
           <button
             onClick={projectsHandler}
-            className="hover:font-bold  transition-transform duration-300 text-secondary font-semibold hover:text-purple-100"
+            className="hover:font-bold transition-transform duration-300 text-secondary font-semibold hover:text-purple-100"
           >
             Projects
           </button>
@@ -137,8 +137,79 @@ function HomePage() {
             className="cursor-pointer hover:text-secondary"
           />
         </div>
+
         <div className="text-sm text-gray-400">
           Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
+        </div>
+
+        {/* License Section */}
+        <div className="text-sm text-gray-500">
+          <p>
+            <a
+              property="dct:title"
+              rel="cc:attributionURL"
+              href="https://github.com/DiogoPCastelos/websiteReact/tree/main"
+              className="hover:text-secondary"
+            >
+              DiogoPCastelos/websiteReact
+            </a>{" "}
+            by{" "}
+            <a
+              rel="cc:attributionURL dct:creator"
+              property="cc:attributionName"
+              href="https://github.com/DiogoPCastelos"
+              className="hover:text-secondary"
+            >
+              Diogo Piteira Castelos
+            </a>{" "}
+            is licensed under{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+              target="_blank"
+              rel="license noopener noreferrer"
+              className="hover:text-secondary inline-block"
+            >
+              CC BY-NC-SA 4.0
+              <div className="flex flex-row">
+                <img
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
+                  src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+                  alt="CC"
+                />
+                <img
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
+                  src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+                  alt="BY"
+                />
+                <img
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
+                  src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+                  alt="NC"
+                />
+                <img
+                  style={{
+                    height: "22px",
+                    marginLeft: "3px",
+                    verticalAlign: "text-bottom",
+                  }}
+                  src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+                  alt="SA"
+                />
+              </div>
+            </a>
+          </p>
         </div>
       </footer>
     </div>
