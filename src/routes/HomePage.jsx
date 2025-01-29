@@ -7,18 +7,21 @@ import {
   faGithub,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
   const [about, setAbout] = useState(true);
-  const [rotateAva, setRotateAva] = useState(false);
-
+  const [direction, setDirection] = useState(true);
   // References to Projects and Contact sections
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
   // Handlers to toggle visibility
-  const aboutHandler = () => setAbout(!about);
+  const aboutHandler = () => {
+    setAbout(!about);
+    setDirection(!direction);
+  };
   const projectsHandler = () => {
     projectsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -26,33 +29,30 @@ function HomePage() {
     contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const rotateAvaHandler = () => setRotateAva(!rotateAva);
+  const [rotation, setRotation] = useState(0);
+
+  const rotateAvaHandler = () => {
+    direction ? setRotation(rotation - 360) : setRotation(rotation + 360);
+  };
 
   return (
     <div className="relative bg-background min-h-screen text-textPrimary flex flex-col">
       {/* Topbar */}
       <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-6">
-        <button
+        <motion.button
+          animate={{ rotate: rotation + 360 }}
+          transition={{ duration: 1 }}
           onClick={() => {
             aboutHandler();
             rotateAvaHandler();
           }}
-          className={`hover:font-semibold transition-transform duration-300 ${
-            about
-              ? "text-secondary font-semibold"
-              : "text-textPrimary hover:text-secondary"
-          }`}
         >
-          {console.log(baseURL)}
           <img
             src={`${baseURL}images/ava.jpeg`}
             alt="Logo"
-            className={`h-[8vh] rounded-full transform-gpu transition-transform duration-300 ${
-              rotateAva ? "rotate-360" : ""
-            }`}
+            className="h-[8vh] rounded-full"
           />
-        </button>
-
+        </motion.button>
         <div className="flex space-x-6">
           <button
             onClick={projectsHandler}
@@ -79,31 +79,39 @@ function HomePage() {
       {/* Main Content */}
       <div className="flex-1 overflow-x-hidden">
         {/* About Section */}
-        <div
-          className={`transition-all duration-700 ease-in-out ${
-            about
-              ? "opacity-100 max-h-[100vh]"
-              : "opacity-0 max-h-0 overflow-hidden"
-          }`}
-        >
-          <About />
-        </div>
+        <AnimatePresence>
+          {about && (
+            <motion.div
+              initial={{ opacity: 0, y: 0, maxHeight: 0 }}
+              animate={{
+                opacity: 1,
+                y: about ? "0" : "-100",
+                maxHeight: "100vh",
+              }}
+              exit={{ opacity: 0, y: 0, maxHeight: 0 }}
+              transition={{ duration: 1, ease: "easeInOut", bounce: 100 }}
+              className="overflow-hidden"
+            >
+              <About />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Other Sections */}
-        <div className="flex flex-col space-y-6 p-6 items-center max-w-screen mx-auto">
+        <div className="flex flex-col space-y-6 items-center max-w-screen mx-auto">
           {/* Projects Section */}
-          <div
+          <motion.div
+            animate={{ paddingTop: about ? "0" : "12vh" }}
+            transition={{ duration: 1.3 }}
             ref={projectsRef}
-            className={`${about ? "" : "pt-[12vh]"} w-screen`}
+            className="w-screen"
           >
             <Projects />
-          </div>
+          </motion.div>
           {/* Contact Section */}
           <div
             ref={contactRef}
-            className={`transition-all max-w-screen-lg duration-700 opacity-100 max-h-[100vh] py-4 ${
-              about ? "" : "pt-[12vh]"
-            } `}
+            className="max-w-screen-lg opacity-100 max-h-[100vh] py-4"
           >
             <Contact />
           </div>

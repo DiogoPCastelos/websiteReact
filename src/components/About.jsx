@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TechStack from "./TechStack";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   faComputer,
   faMicrophone,
@@ -8,17 +10,55 @@ import {
 
 const About = () => {
   const baseURL = import.meta.env.BASE_URL;
+  const fullName = "Diogo Piteira Castelos"; // Full name
+  const startText = "Diogo Pit"; // Initial text
+  const [displayedText, setDisplayedText] = useState(startText);
+  const [isBlinking, setIsBlinking] = useState(true);
+
+  useEffect(() => {
+    let index = startText.length; // Start from "Diogo Piteira Castelo"
+    const typingInterval = setInterval(() => {
+      if (index < fullName.length) {
+        setDisplayedText(fullName.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 200); // 500ms delay for typing effect
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  useEffect(() => {
+    const blinkInterval = setInterval(() => {
+      setIsBlinking((prev) => !prev);
+    }, 800); // Cursor blinks every 0.5s
+
+    return () => clearInterval(blinkInterval);
+  }, []);
 
   return (
     <div
       className="relative w-full h-[100vh] flex bg-cover bg-center"
       style={{
-        backgroundImage: `url('${baseURL}images/stars.webp')`, // Updated path
+        backgroundImage: `url('${baseURL}images/stars.webp')`,
       }}
     >
       {/* Left Side: Content */}
-      <div className="flex-1 flex flex-col justify-center items-centerg-opacity-50 text-white text-center p-10">
-        <h1 className="text-4xl font-bold">Diogo Piteira Castelos</h1>
+      <div className="flex-1 flex flex-col justify-center items-center text-white text-center p-10">
+        <h1 className="text-4xl font-bold">
+          {displayedText}
+          <motion.span
+            animate={{ opacity: isBlinking ? 1 : 0 }}
+            transition={{
+              duration: 0.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          >
+            |
+          </motion.span>
+        </h1>
         <p className="text-xl mt-4">Full-Stack Developer</p>
         <p className="text-xl">Mobile and Web Development</p>
         <div>
@@ -48,7 +88,7 @@ const About = () => {
           push me to grow both personally and professionally.
         </p>
         <p className="text-lg mt-4">
-          Native in <strong>Portuguese</strong> and <strong>English</strong>{" "}
+          Native in <strong>Portuguese</strong> and <strong>English</strong>,
           fluent in <strong>Spanish</strong> and <strong>French</strong>.
         </p>
         <p className="text-lg mt-4">

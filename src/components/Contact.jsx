@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
+import { motion } from "motion/react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -80,22 +81,41 @@ const Contact = () => {
         className="cursor-pointer bg-gray-200 p-4 rounded-t-3xl flex justify-between items-center hover:bg-gray-300 transition group"
       >
         <h2 className="text-2xl font-bold">Contact Me</h2>
-        <span
-          className={`text-lg transition-transform ${
+        <motion.span
+          animate={{
+            rotate: isExpanded ? 180 : 0,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            damping: 5,
+          }}
+          className={`text-lg ${
             isExpanded
-              ? "rotate-180 group-hover:text-red-400"
-              : "rotate-0 group-hover:text-green-400"
+              ? "group-hover:text-red-500"
+              : "group-hover:text-green-500"
           }`}
         >
           ▼
-        </span>
+        </motion.span>
       </div>
 
       {/* Collapsible content */}
-      <div
-        className={`transition-all duration-600 ease-in-out ${
-          isExpanded ? "max-h-[100vh] p-6" : "max-h-0 p-0"
-        } overflow-hidden`}
+      <motion.div
+        animate={{
+          maxHeight: isExpanded ? "100vh" : 0,
+          padding: isExpanded ? 24 : 0,
+        }}
+        transition={
+          isExpanded
+            ? {
+                type: "spring",
+                stiffness: 100,
+                damping: 5,
+              }
+            : { ease: "linear", duration: 0.5 }
+        }
+        className={`overflow-hidden`}
       >
         <p>
           Feel free to send me a message! I’ll get back to you as soon as I can.
@@ -161,7 +181,7 @@ const Contact = () => {
             {isWaiting ? "Please Wait..." : "Send Message"}
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };
