@@ -64,10 +64,14 @@ const Projects = () => {
             <h2
               onClick={() => window.open(project.link)}
               className="text-3xl cursor-pointer font-semibold tracking-tight text-white title-hover"
+              style={{ fontFamily: "Poppins, sans-serif" }}
             >
               {project.name}
             </h2>
-            <p className="mt-4 text-gray-300 leading-relaxed text-lg">
+            <p
+              className="mt-4 text-gray-300 leading-relaxed text-lg font-inter"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
               {project.description}
             </p>
           </div>
