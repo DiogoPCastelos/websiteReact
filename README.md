@@ -119,6 +119,7 @@ npm run deploy
 
 👨‍💻 **Diogo Piteira Castelos**  
 📍 **Lisbon, Portugal 🇵🇹** | **Computer Engineering Student** | **Full-Stack Developer**
+
 🔗 [LinkedIn](https://www.linkedin.com/in/diogopcastelos/) | [GitHub](https://github.com/DiogoPCastelos) | [Website](https://diogopcastelos.pt)
 
 ---
