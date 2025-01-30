@@ -72,23 +72,25 @@ function HomePage() {
     const getRandomColor = () => {
       const colors = [
         "rgba(173, 216, 230, 1)", // Very light blue
-        "rgba(144, 238, 144, 1)", // Very light green
+        "rgba(129, 148, 132, 1)", // Very light green
         "rgba(255, 255, 224, 1)", // Light yellow
-        "rgba(255, 165, 0, 1)", // Orange
+        "rgba(252, 227, 151, 1)", // Orange
         "rgba(255, 250, 250, 1)", // Soft white
       ];
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
     const generateStars = () => {
-      stars = Array.from({ length: 1000 }).map(() => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1, // 1px - 3px
-        brightness: Math.random() * 0.5 + 0.5, // 50% - 100% opacity
-        twinkleSpeed: Math.random() * 0.002 + 0.002, // Twinkle effect
-        color: getRandomColor(),
-      }));
+      stars = Array.from({ length: canvas.width > 800 ? 3000 : 750 }).map(
+        () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 0.5, // 1px - 3px
+          brightness: Math.random() * 0.5 + 0.5, // 50% - 100% opacity
+          twinkleSpeed: Math.random() * 0.002 + 0.002, // Twinkle effect
+          color: getRandomColor(),
+        })
+      );
     };
 
     const drawStars = () => {

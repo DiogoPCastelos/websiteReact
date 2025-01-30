@@ -106,7 +106,7 @@ const About = ({ setHeight }) => {
         </p>
 
         <p
-          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           My passion lies in technology and software development, with a
@@ -121,7 +121,7 @@ const About = ({ setHeight }) => {
         </p>
 
         <p
-          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Native in <strong>Portuguese</strong> and <strong>English</strong>,
@@ -129,7 +129,7 @@ const About = ({ setHeight }) => {
         </p>
 
         <p
-          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           I’m actively looking for <strong>internships</strong> and{" "}
