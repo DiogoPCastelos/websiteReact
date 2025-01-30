@@ -18,6 +18,7 @@ function HomePage() {
   const [aboutVisible, setAboutVisible] = useState(true);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
+  const aboutRef = useRef(null); // Reference for scrolling
   const [rotation, setRotation] = useState(360);
 
   // Scroll handlers
@@ -29,9 +30,18 @@ function HomePage() {
     }
   }, []);
 
-  // Toggle About section & rotate avatar
+  // Toggle About section, rotate avatar & scroll into view
   const toggleAboutSection = () => {
-    setAboutVisible(!aboutVisible);
+    setAboutVisible((prev) => {
+      const newState = !prev;
+      if (newState) {
+        setTimeout(
+          () => scrollToSection(aboutRef, (12 * window.innerHeight) / 100),
+          300
+        );
+      }
+      return newState;
+    });
     setRotation(aboutVisible ? 0 : 360);
   };
 
@@ -81,6 +91,7 @@ function HomePage() {
         <AnimatePresence>
           {aboutVisible && (
             <motion.div
+              ref={aboutRef}
               initial={{ opacity: 0, y: 0, maxHeight: 0 }}
               animate={{ opacity: 1, y: 0, maxHeight: "100vh" }}
               exit={{ opacity: 0, y: 0, maxHeight: 0 }}
@@ -226,15 +237,7 @@ function HomePage() {
             >
               Diogo Piteira Castelos
             </a>{" "}
-            is licensed under{" "}
-            <a
-              href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-secondary"
-            >
-              CC BY-NC-SA 4.0
-            </a>
+            is licensed under **CC BY-NC-SA 4.0**.
           </p>
         </div>
         <div className="text-sm text-gray-400">
