@@ -1,5 +1,4 @@
-import { useState, useRef } from "react";
-import { About, Projects, Contact } from "../components";
+import { useState, useRef, lazy, Suspense, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faReact,
@@ -7,68 +6,69 @@ import {
   faGithub,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Lazy Load Components
+const About = lazy(() => import("../components/About"));
+const Projects = lazy(() => import("../components/Projects"));
+const Contact = lazy(() => import("../components/Contact"));
 
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
-  const [about, setAbout] = useState(true);
-  const [rotateAva, setRotateAva] = useState(false);
-
-  // References to Projects and Contact sections
+  const [aboutVisible, setAboutVisible] = useState(true);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
+  const [rotation, setRotation] = useState(360);
 
-  // Handlers to toggle visibility
-  const aboutHandler = () => setAbout(!about);
-  const projectsHandler = () => {
-    projectsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-  const contactHandler = () => {
-    contactRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  // Scroll handlers
+  const scrollToSection = useCallback((ref, offset = 0) => {
+    if (ref.current) {
+      const y =
+        ref.current.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, []);
 
-  const rotateAvaHandler = () => setRotateAva(!rotateAva);
+  // Toggle About section & rotate avatar
+  const toggleAboutSection = () => {
+    setAboutVisible(!aboutVisible);
+    setRotation(aboutVisible ? 0 : 360);
+  };
 
   return (
-    <div className="relative bg-background min-h-screen text-textPrimary flex flex-col">
+    <div className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 min-h-screen text-textPrimary flex flex-col">
       {/* Topbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-6">
-        <button
-          onClick={() => {
-            aboutHandler();
-            rotateAvaHandler();
-          }}
-          className={`hover:font-semibold transition-transform duration-300 ${
-            about
-              ? "text-secondary font-semibold"
-              : "text-textPrimary hover:text-secondary"
-          }`}
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-[12vh] px-8 backdrop-blur-xl bg-opacity-10">
+        <motion.button
+          animate={{ rotate: rotation }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          onClick={toggleAboutSection}
         >
           <img
-            src={`${baseURL}/images/ava.jpeg`}
+            src={`${baseURL}images/ava.jpeg`}
             alt="Logo"
-            className={`h-[8vh] rounded-full transform-gpu transition-transform duration-300 ${
-              rotateAva ? "rotate-360" : ""
-            }`}
+            className="h-[8vh] rounded-full shadow-lg"
           />
-        </button>
-
-        <div className="flex space-x-6">
+        </motion.button>
+        <div className="flex space-x-6 text-lg font-medium">
           <button
-            onClick={projectsHandler}
-            className="hover:font-bold transition-transform duration-300 text-secondary font-semibold hover:text-purple-100"
+            onClick={() =>
+              scrollToSection(projectsRef, (12 * window.innerHeight) / 100)
+            } // Scroll 24vh above projects
+            className="nav-button"
           >
             Projects
           </button>
           <button
-            onClick={contactHandler}
-            className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-purple-100"
+            onClick={() => scrollToSection(contactRef)}
+            className="nav-button"
           >
             Contact
           </button>
           <a
             href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
             download
-            className="hover:font-bold font-semibold transition-transform duration-300 text-secondary hover:text-green-500"
+            className="nav-button hover:text-green-500"
           >
             CV
           </a>
@@ -78,39 +78,68 @@ function HomePage() {
       {/* Main Content */}
       <div className="flex-1 overflow-x-hidden">
         {/* About Section */}
-        <div
-          className={`transition-all duration-700 ease-in-out ${
-            about
-              ? "opacity-100 max-h-[100vh]"
-              : "opacity-0 max-h-0 overflow-hidden"
-          }`}
-        >
-          <About />
-        </div>
+        <AnimatePresence>
+          {aboutVisible && (
+            <motion.div
+              initial={{ opacity: 0, y: 0, maxHeight: 0 }}
+              animate={{ opacity: 1, y: 0, maxHeight: "100vh" }}
+              exit={{ opacity: 0, y: 0, maxHeight: 0 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <Suspense
+                fallback={
+                  <div className="text-center text-gray-400">
+                    Loading About...
+                  </div>
+                }
+              >
+                <About />
+              </Suspense>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Other Sections */}
-        <div className="flex flex-col space-y-6 p-6 items-center max-w-screen mx-auto">
+        <div className="flex flex-col space-y-12 items-center max-w-6xl mx-auto">
           {/* Projects Section */}
-          <div
+          <motion.div
+            animate={{ paddingTop: aboutVisible ? "12vh" : "24vh" }}
+            transition={{ duration: 1.3 }}
             ref={projectsRef}
-            className={`${about ? "" : "pt-[12vh]"} w-screen`}
+            className="w-full"
           >
-            <Projects />
-          </div>
+            <Suspense
+              fallback={
+                <div className="text-center text-gray-400">
+                  Loading Projects...
+                </div>
+              }
+            >
+              <Projects />
+            </Suspense>
+          </motion.div>
+
           {/* Contact Section */}
           <div
             ref={contactRef}
-            className={`transition-all max-w-screen-lg duration-700 opacity-100 max-h-[100vh] py-4 ${
-              about ? "" : "pt-[12vh]"
-            } `}
+            className="max-w-screen-lg opacity-100 max-h-[100vh] py-4"
           >
-            <Contact />
+            <Suspense
+              fallback={
+                <div className="text-center text-gray-400">
+                  Loading Contact...
+                </div>
+              }
+            >
+              <Contact />
+            </Suspense>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="bg-background text-center py-4">
+      <footer className="text-center py-4">
         <div className="flex justify-center space-x-6 mb-2">
           <FontAwesomeIcon
             size="3x"
@@ -137,10 +166,6 @@ function HomePage() {
             }
             className="cursor-pointer hover:text-secondary"
           />
-        </div>
-
-        <div className="text-sm text-gray-400">
-          Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
         </div>
 
         {/* License Section */}
@@ -203,14 +228,17 @@ function HomePage() {
             </a>{" "}
             is licensed under{" "}
             <a
-              href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
               target="_blank"
-              rel="license noopener noreferrer"
-              className="hover:text-secondary inline-block"
+              rel="noopener noreferrer"
+              className="hover:text-secondary"
             >
               CC BY-NC-SA 4.0
             </a>
           </p>
+        </div>
+        <div className="text-sm text-gray-400">
+          Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
         </div>
       </footer>
     </div>
