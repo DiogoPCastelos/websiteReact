@@ -4,16 +4,26 @@ import { useEffect, useState } from "react";
 const TechStack = () => {
   const baseURL = import.meta.env.BASE_URL; // Dynamically resolve base path
   const [isTouch, setIsTouch] = useState(false);
+  const [rotations, setRotations] = useState({}); // Store rotation state per image
 
   // Detect if the device is touch-enabled
   useEffect(() => {
     setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
 
-  // Common animation config
-  const animationProps = {
-    animate: { rotate: 360 },
-    transition: { stiffness: 50, damping: 5, type: "spring" },
+  // Spring transition config
+  const springConfig = {
+    type: "spring",
+    stiffness: 50,
+    damping: 5,
+  };
+
+  // Handle touch rotation (increments rotation by +360°)
+  const handleTouchRotate = (index) => {
+    setRotations((prev) => ({
+      ...prev,
+      [index]: (prev[index] || 0) + 360, // Increase rotation by +360°
+    }));
   };
 
   return (
@@ -48,16 +58,13 @@ const TechStack = () => {
       ].map(({ src, alt }, index) => (
         <motion.img
           key={index}
-          {...(isTouch
-            ? {
-                onTouchStart: (e) =>
-                  e.currentTarget.classList.add("rotate-360"),
-              }
-            : { whileHover: { rotate: 360 } })}
-          transition={{ stiffness: 50, damping: 5, type: "spring" }}
+          whileHover={!isTouch ? { rotate: 360 } : {}} // Rotate once on hover
+          animate={{ rotate: rotations[index] || 0 }} // Apply cumulative rotation
+          transition={springConfig} // Smooth spring animation
+          onClick={() => isTouch && handleTouchRotate(index)} // Increment rotation on touch
           src={`${baseURL}images/${src}`}
           alt={alt}
-          className="size-[6vh] object-contain"
+          className="size-[6vh] object-contain cursor-pointer"
         />
       ))}
     </div>
