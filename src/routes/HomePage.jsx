@@ -18,18 +18,22 @@ function HomePage() {
   const [aboutVisible, setAboutVisible] = useState(true);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(360);
 
   // Scroll handlers
-  const scrollToSection = useCallback((ref) => {
-    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const scrollToSection = useCallback((ref, offset = 0) => {
+    if (ref.current) {
+      const y =
+        ref.current.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   }, []);
 
   // Toggle About section & rotate avatar
-  const toggleAboutSection = useCallback(() => {
-    setAboutVisible((prev) => !prev);
-    setRotation((prev) => prev - 360);
-  }, []);
+  const toggleAboutSection = () => {
+    setAboutVisible(!aboutVisible);
+    setRotation(aboutVisible ? 0 : 360);
+  };
 
   return (
     <div className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 min-h-screen text-textPrimary flex flex-col">
@@ -48,7 +52,9 @@ function HomePage() {
         </motion.button>
         <div className="flex space-x-6 text-lg font-medium">
           <button
-            onClick={() => scrollToSection(projectsRef)}
+            onClick={() =>
+              scrollToSection(projectsRef, (12 * window.innerHeight) / 100)
+            } // Scroll 24vh above projects
             className="nav-button"
           >
             Projects
@@ -222,10 +228,10 @@ function HomePage() {
             </a>{" "}
             is licensed under{" "}
             <a
-              href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1"
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
               target="_blank"
-              rel="license noopener noreferrer"
-              className="hover:text-secondary inline-block"
+              rel="noopener noreferrer"
+              className="hover:text-secondary"
             >
               CC BY-NC-SA 4.0
             </a>
