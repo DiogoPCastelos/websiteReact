@@ -50,7 +50,7 @@ const About = ({ setHeight }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      className="relative w-full flex flex-col md:flex-row bg-cover bg-center px-4 sm:px-6 md:px-10 lg:px-16 min-h-screen lg:h-screen lg:py-0 py-6"
+      className="relative w-full flex flex-col md:flex-row bg-cover bg-center px-4 sm:px-6 md:px-10 lg:px-16 min-h-screen lg:h-screen lg:py-0 py-6 pt-[20vh]"
       style={{ backgroundImage: `url('${baseURL}images/stars.webp')` }}
     >
       {/* Left Section - Name and Tech */}
