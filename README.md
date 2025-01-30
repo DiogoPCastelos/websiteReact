@@ -91,19 +91,19 @@ Visit `http://localhost:5173/` to view the website.
 This project is deployed using **GitHub Pages**.  
 For **GH Pages**:
 
+```
 /websiteReact
 │── package.json
-
-add:
+```
 
 ```
   "homepage": "[websiteWhereItRuns]",
 ```
 
+```
 /websiteReact
 │── package.json
-
-add:
+```
 
 ```
     base: "/websiteReact/",
