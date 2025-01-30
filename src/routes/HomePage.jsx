@@ -45,7 +45,7 @@ function HomePage() {
           onClick={toggleAboutSection}
         >
           <img
-            src={`${baseURL}/images/ava.jpeg`}
+            src={`${baseURL}images/ava.jpeg`}
             alt="Logo"
             className="h-[8vh] rounded-full shadow-lg"
           />
