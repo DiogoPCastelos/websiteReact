@@ -40,8 +40,21 @@ function HomePage() {
   }, []);
 
   const toggleAboutSection = () => {
-    setAboutVisible((prev) => !prev);
-    setAboutHeight(aboutVisible ? 0 : "auto");
+    setAboutVisible((prev) => {
+      setAboutHeight(aboutVisible ? 0 : "auto");
+      aboutVisible
+        ? ""
+        : scrollToSection(aboutRef, (12 * window.innerHeight) / 100);
+      setRotation(aboutVisible ? 0 : 360);
+      const newState = !prev;
+      if (newState) {
+        setTimeout(
+          () => scrollToSection(aboutRef, (12 * window.innerHeight) / 100),
+          300
+        );
+      }
+      return newState;
+    });
   };
 
   // Scroll handlers
@@ -52,23 +65,6 @@ function HomePage() {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   }, []);
-
-  /* const toggleAboutSection = () => {
-    setAboutVisible((prev) => {
-      const newState = !prev;
-      if (newState) {
-        setTimeout(
-          () => scrollToSection(aboutRef, (12 * window.innerHeight) / 100),
-          300
-        );
-      }
-      return newState;
-    });
-    aboutVisible
-      ? ""
-      : scrollToSection(aboutRef, (12 * window.innerHeight) / 100);
-    setRotation(aboutVisible ? 0 : 360);
-  }; */
 
   // ⭐ Canvas-Based Starfield Background with Fixed Star Positions ⭐
   useEffect(() => {

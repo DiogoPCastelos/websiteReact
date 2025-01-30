@@ -2,11 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TechStack from "./TechStack";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import {
-  faComputer,
-  faMicrophone,
-  faSailboat,
-} from "@fortawesome/free-solid-svg-icons";
+import { faComputer, faSailboat } from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
   const baseURL = import.meta.env.BASE_URL;
@@ -43,7 +39,7 @@ const About = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      className="relative w-full flex flex-col md:flex-row bg-transparent px-4 sm:px-6 md:px-10 lg:px-16 min-h-screen lg:h-screen lg:py-0 py-6 pt-[20vh]"
+      className="relative w-full flex flex-col md:flex-row bg-transparent px-4 sm:px-6 md:px-10 lg:px-16 min-h-screen lg:h-auto py-6 pt-[12vh]"
     >
       {/* Left Section - Name and Tech */}
       <div className="flex-1 flex flex-col justify-center items-center text-white text-center px-4">
@@ -83,7 +79,7 @@ const About = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: window.outerWidth > 800 ? 30 : 0 }}
         transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-        className="flex-1 flex flex-col justify-center text-white space-y-4 sm:space-y-6 lg:space-y-8 px-4 sm:px-6 md:px-10 max-w-[90%] md:max-w-prose mx-auto"
+        className="flex-1 flex flex-col justify-center text-white space-y-2 sm:space-y-4 lg:space-y-6 max-w-full"
       >
         <p
           className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
@@ -122,7 +118,7 @@ const About = () => {
           environments.
         </p>
         <p
-          className="hidden italic text-blue-200 sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
+          className="italic text-blue-200 sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           They say the sky is never the same twice—just like this page. Refresh,
