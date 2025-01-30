@@ -169,7 +169,7 @@ function HomePage() {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-col justify-center overflow-x-hidden relative z-10">
+      <div className="flex-col justify-center overflow-hidden relative z-10">
         <AnimatePresence>
           {aboutVisible && (
             <motion.div
@@ -230,6 +230,95 @@ function HomePage() {
 
       {/* Footer */}
       <footer className="text-center py-4">
+        <div className="flex justify-center space-x-6 mb-2">
+          <FontAwesomeIcon
+            size="3x"
+            color="white"
+            icon={faLinkedin}
+            onClick={() =>
+              window.open("https://www.linkedin.com/in/diogopcastelos/")
+            }
+            className="cursor-pointer hover:text-secondary"
+          />
+          <FontAwesomeIcon
+            size="3x"
+            color="white"
+            icon={faGithub}
+            onClick={() => window.open("https://github.com/DiogoPCastelos/")}
+            className="cursor-pointer hover:text-secondary"
+          />
+          <FontAwesomeIcon
+            size="3x"
+            color="white"
+            icon={faInstagram}
+            onClick={() =>
+              window.open("https://www.instagram.com/diogopcastelos/")
+            }
+            className="cursor-pointer hover:text-secondary"
+          />
+        </div>
+
+        {/* License Section */}
+        <div className="flex pt-2 flex-row justify-center">
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+            alt="CC"
+          />
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+            alt="BY"
+          />
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"
+            alt="NC"
+          />
+          <img
+            style={{
+              height: "22px",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+            }}
+            src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"
+            alt="SA"
+          />
+        </div>
+        <div className="text-sm text-gray-500">
+          <p>
+            <a
+              property="dct:title"
+              rel="cc:attributionURL"
+              href="https://github.com/DiogoPCastelos/websiteReact/tree/main"
+              className="hover:text-secondary"
+            >
+              DiogoPCastelos/websiteReact
+            </a>{" "}
+            by{" "}
+            <a
+              rel="cc:attributionURL dct:creator"
+              property="cc:attributionName"
+              href="https://github.com/DiogoPCastelos"
+              className="hover:text-secondary"
+            >
+              Diogo Piteira Castelos
+            </a>{" "}
+            is licensed under **CC BY-NC-SA 4.0**.
+          </p>
+        </div>
         <div className="text-sm text-gray-400">
           Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
         </div>
