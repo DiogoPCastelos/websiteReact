@@ -6,7 +6,10 @@ import { motion } from "framer-motion";
 
 const Projects = () => {
   const baseURL = import.meta.env.BASE_URL;
-  const containerSize = { width: 300, height: 500 }; // 30vw x 60vh in pixels
+  const containerSize = {
+    width: window.outerWidth > 800 ? 300 : 200,
+    height: window.outerWidth > 800 ? 500 : 1300,
+  }; // 30vw x 60vh in pixels
   const imageSize = 80; // 8vh in pixels
   const minSpacing = 80; // Minimum spacing between images
 

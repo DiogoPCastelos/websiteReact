@@ -16,10 +16,12 @@ const Contact = lazy(() => import("../components/Contact"));
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
   const [aboutVisible, setAboutVisible] = useState(true);
+  const [aboutHeight, setAboutHeight] = useState(0);
+  const [rotation, setRotation] = useState(360);
+
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
   const aboutRef = useRef(null); // Reference for scrolling
-  const [rotation, setRotation] = useState(360);
 
   // Scroll handlers
   const scrollToSection = useCallback((ref, offset = 0) => {
@@ -93,7 +95,11 @@ function HomePage() {
             <motion.div
               ref={aboutRef}
               initial={{ opacity: 0, y: 0, maxHeight: 0 }}
-              animate={{ opacity: 1, y: 0, maxHeight: "100vh" }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                maxHeight: window.outerWidth > 800 ? "100vh" : aboutHeight,
+              }}
               exit={{ opacity: 0, y: 0, maxHeight: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
               className="overflow-hidden"
@@ -105,17 +111,16 @@ function HomePage() {
                   </div>
                 }
               >
-                <About />
+                <About setHeight={setAboutHeight} />
               </Suspense>
             </motion.div>
           )}
         </AnimatePresence>
-
         {/* Other Sections */}
-        <div className="flex flex-col space-y-12 items-center max-w-6xl mx-auto">
+        <div className="flex flex-col space-y-1 items-center max-w-6xl mx-auto">
           {/* Projects Section */}
           <motion.div
-            animate={{ paddingTop: aboutVisible ? "12vh" : "24vh" }}
+            animate={{ paddingTop: aboutVisible ? "12vh" : "16vh" }}
             transition={{ duration: 1.3 }}
             ref={projectsRef}
             className="w-full"

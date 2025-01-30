@@ -1,20 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TechStack from "./TechStack";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   faComputer,
   faMicrophone,
   faSailboat,
 } from "@fortawesome/free-solid-svg-icons";
 
-const About = () => {
+const About = ({ setHeight }) => {
   const baseURL = import.meta.env.BASE_URL;
   const fullName = "Diogo Piteira Castelos";
   const [displayedText, setDisplayedText] = useState("");
   const [isBlinking, setIsBlinking] = useState(true);
+  const aboutRef = useRef(null);
 
-  // Typing effect animation
+  // Effect to measure height for mobile
+  useEffect(() => {
+    if (aboutRef.current) {
+      setHeight(aboutRef.current.offsetHeight);
+    }
+  }, []);
+
   useEffect(() => {
     let index = 0;
     const typingInterval = setInterval(() => {
@@ -29,7 +36,6 @@ const About = () => {
     return () => clearInterval(typingInterval);
   }, []);
 
-  // Blinking cursor effect
   useEffect(() => {
     const blinkInterval = setInterval(() => {
       setIsBlinking((prev) => !prev);
@@ -40,15 +46,16 @@ const About = () => {
 
   return (
     <motion.div
+      ref={aboutRef} // Reference for measuring height
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      className="relative w-full h-screen flex bg-cover bg-center px-10 lg:px-16"
+      className="relative w-full flex flex-col md:flex-row bg-cover bg-center px-4 sm:px-6 md:px-10 lg:px-16 min-h-screen lg:h-screen lg:py-0 py-6"
       style={{ backgroundImage: `url('${baseURL}images/stars.webp')` }}
     >
       {/* Left Section - Name and Tech */}
-      <div className="flex-1 flex flex-col justify-center items-center text-white text-center">
-        <h1 className="text-5xl lg:text-6xl font-bold tracking-tight">
+      <div className="flex-1 flex flex-col justify-center items-center text-white text-center px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
           {displayedText}
           <motion.span
             animate={{ opacity: isBlinking ? 1 : 0 }}
@@ -61,10 +68,10 @@ const About = () => {
             |
           </motion.span>
         </h1>
-        <p className="text-2xl lg:text-3xl mt-4 opacity-80">
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 opacity-80">
           Full-Stack Developer
         </p>
-        <p className="text-xl lg:text-2xl opacity-80">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-80">
           Mobile and Web Development
         </p>
         <TechStack />
@@ -75,9 +82,9 @@ const About = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-        className="flex-1 flex flex-col justify-center text-white space-y-6 lg:space-y-8"
+        className="flex-1 flex flex-col justify-center text-white space-y-4 sm:space-y-6 lg:space-y-8 px-4 sm:px-6 md:px-10 max-w-[90%] md:max-w-prose mx-auto"
       >
-        <p className="text-lg lg:text-xl leading-relaxed max-w-prose">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
           Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 21-year-old
           Computer Engineering student from Évora, Portugal, currently pursuing
           my <FontAwesomeIcon icon={faComputer} className="text-gray-300" />{" "}
@@ -87,7 +94,7 @@ const About = () => {
           <strong>In-Nova</strong>.
         </p>
 
-        <p className="text-lg lg:text-xl leading-relaxed max-w-prose">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
           My passion lies in technology and software development, with a
           particular love for <strong>front-end development</strong>, where
           creativity meets functionality. Outside the tech world, I find
@@ -99,12 +106,12 @@ const About = () => {
           push me to grow both personally and professionally.
         </p>
 
-        <p className="text-lg lg:text-xl leading-relaxed max-w-prose">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
           Native in <strong>Portuguese</strong> and <strong>English</strong>,
           fluent in <strong>Spanish</strong> and <strong>French</strong>.
         </p>
 
-        <p className="text-lg lg:text-xl leading-relaxed max-w-prose">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
           I’m actively looking for <strong>internships</strong> and{" "}
           <strong>job opportunities</strong> in software development, eager to
           contribute, learn, and innovate in dynamic and collaborative
