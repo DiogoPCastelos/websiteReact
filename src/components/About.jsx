@@ -8,19 +8,12 @@ import {
   faSailboat,
 } from "@fortawesome/free-solid-svg-icons";
 
-const About = ({ setHeight }) => {
+const About = () => {
   const baseURL = import.meta.env.BASE_URL;
   const fullName = "Diogo Piteira Castelos";
   const [displayedText, setDisplayedText] = useState("");
   const [isBlinking, setIsBlinking] = useState(true);
   const aboutRef = useRef(null);
-
-  // Effect to measure height for mobile
-  useEffect(() => {
-    if (aboutRef.current) {
-      setHeight(aboutRef.current.offsetHeight);
-    }
-  }, []);
 
   useEffect(() => {
     let index = 0;

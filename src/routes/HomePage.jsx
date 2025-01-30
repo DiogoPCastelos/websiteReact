@@ -23,13 +23,26 @@ const Contact = lazy(() => import("../components/Contact"));
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
   const [aboutVisible, setAboutVisible] = useState(true);
-  const [aboutHeight, setAboutHeight] = useState(0);
   const [rotation, setRotation] = useState(360);
   const canvasRef = useRef(null);
+  const [aboutHeight, setAboutHeight] = useState("100vh"); // Start at 100vh
 
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
   const aboutRef = useRef(null);
+
+  useEffect(() => {
+    // After a small delay, transition from 100vh to auto
+    const timeout = setTimeout(() => {
+      setAboutHeight("auto");
+    }, 500); // Adjust delay if necessary
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const toggleAboutSection = () => {
+    setAboutVisible((prev) => !prev);
+    setAboutHeight(aboutVisible ? 0 : "auto");
+  };
 
   // Scroll handlers
   const scrollToSection = useCallback((ref, offset = 0) => {
@@ -40,7 +53,7 @@ function HomePage() {
     }
   }, []);
 
-  const toggleAboutSection = () => {
+  /* const toggleAboutSection = () => {
     setAboutVisible((prev) => {
       const newState = !prev;
       if (newState) {
@@ -55,7 +68,7 @@ function HomePage() {
       ? ""
       : scrollToSection(aboutRef, (12 * window.innerHeight) / 100);
     setRotation(aboutVisible ? 0 : 360);
-  };
+  }; */
 
   // ⭐ Canvas-Based Starfield Background with Fixed Star Positions ⭐
   useEffect(() => {
@@ -176,9 +189,9 @@ function HomePage() {
           {aboutVisible && (
             <motion.div
               ref={aboutRef}
-              initial={{ opacity: 0, y: 0, maxHeight: 0 }}
-              animate={{ opacity: 1, y: 0, maxHeight: "100vh" }}
-              exit={{ opacity: 0, y: 0, maxHeight: 0 }}
+              initial={{ opacity: 0, height: 0 }} // Start collapsed
+              animate={{ opacity: 1, height: aboutHeight }} // First 100vh, then auto
+              exit={{ opacity: 0, height: 0 }} // Collapse smoothly
               transition={{ duration: 1, ease: "easeInOut" }}
               className="overflow-hidden"
             >
@@ -189,7 +202,7 @@ function HomePage() {
                   </div>
                 }
               >
-                <About setHeight={setAboutHeight} />
+                <About />
               </Suspense>
             </motion.div>
           )}
