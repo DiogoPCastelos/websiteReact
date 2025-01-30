@@ -114,28 +114,27 @@ const About = ({ setHeight }) => {
           creativity meets functionality. Outside the tech world, I find
           inspiration in{" "}
           <FontAwesomeIcon icon={faSailboat} className="text-blue-300" />{" "}
-          <strong>sailing</strong>,{" "}
-          <FontAwesomeIcon icon={faMicrophone} className="text-red-300" />{" "}
-          <strong>debating</strong>, and constantly seeking new challenges that
-          push me to grow both personally and professionally.
+          <strong>sailing</strong> and constantly seeking new challenges that
+          push me to grow both personally and professionally. Native in{" "}
+          <strong>Portuguese</strong> and <strong>English</strong>, fluent in{" "}
+          <strong>Spanish</strong> and <strong>French</strong>.
         </p>
-
         <p
           className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Native in <strong>Portuguese</strong> and <strong>English</strong>,
-          fluent in <strong>Spanish</strong> and <strong>French</strong>.
-        </p>
-
-        <p
-          className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          I’m actively looking for <strong>internships</strong> and{" "}
+          I am actively looking for <strong>internships</strong> and{" "}
           <strong>job opportunities</strong> in software development, eager to
           contribute, learn, and innovate in dynamic and collaborative
           environments.
+        </p>
+        <p
+          className="hidden italic text-blue-200 sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
+          They say the sky is never the same twice—just like this page. Refresh,
+          and you will get a brand-new sky. Unique to this moment in time we're
+          sharing.
         </p>
       </motion.div>
     </motion.div>

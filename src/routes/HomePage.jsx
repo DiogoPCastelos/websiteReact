@@ -129,7 +129,7 @@ function HomePage() {
       {/* ⭐ Canvas Background (Behind Topbar) */}
       <canvas
         ref={canvasRef}
-        className="fixed top-0 left-0 w-full h-full pointer-events-none z-[10]"
+        className="fixed top-0 left-0 w-full h-full blur-[2px] pointer-events-none z-[10]"
       />
 
       {/* Topbar (Now Above Starfield) */}
