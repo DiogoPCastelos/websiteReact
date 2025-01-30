@@ -98,7 +98,7 @@ function HomePage() {
               animate={{
                 opacity: 1,
                 y: 0,
-                maxHeight: window.outerWidth > 800 ? "100vh" : aboutHeight,
+                maxHeight: window.outerWidth > 800 ? "100vh" : aboutHeight + 50,
               }}
               exit={{ opacity: 0, y: 0, maxHeight: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}

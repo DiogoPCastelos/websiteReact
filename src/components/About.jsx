@@ -31,7 +31,7 @@ const About = ({ setHeight }) => {
       } else {
         clearInterval(typingInterval);
       }
-    }, 100);
+    }, 150);
 
     return () => clearInterval(typingInterval);
   }, []);
@@ -55,7 +55,10 @@ const About = ({ setHeight }) => {
     >
       {/* Left Section - Name and Tech */}
       <div className="flex-1 flex flex-col justify-center items-center text-white text-center px-4">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
           {displayedText}
           <motion.span
             animate={{ opacity: isBlinking ? 1 : 0 }}
@@ -68,10 +71,16 @@ const About = ({ setHeight }) => {
             |
           </motion.span>
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 opacity-80">
+        <p
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 opacity-80"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           Full-Stack Developer
         </p>
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-80">
+        <p
+          className="text-base sm:text-lg md:text-xl lg:text-2xl opacity-80"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           Mobile and Web Development
         </p>
         <TechStack />
@@ -80,11 +89,14 @@ const About = ({ setHeight }) => {
       {/* Right Section - Description */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: window.outerWidth > 800 ? 30 : 0 }}
         transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
         className="flex-1 flex flex-col justify-center text-white space-y-4 sm:space-y-6 lg:space-y-8 px-4 sm:px-6 md:px-10 max-w-[90%] md:max-w-prose mx-auto"
       >
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+        <p
+          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 21-year-old
           Computer Engineering student from Évora, Portugal, currently pursuing
           my <FontAwesomeIcon icon={faComputer} className="text-gray-300" />{" "}
@@ -94,7 +106,10 @@ const About = ({ setHeight }) => {
           <strong>In-Nova</strong>.
         </p>
 
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+        <p
+          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           My passion lies in technology and software development, with a
           particular love for <strong>front-end development</strong>, where
           creativity meets functionality. Outside the tech world, I find
@@ -106,12 +121,18 @@ const About = ({ setHeight }) => {
           push me to grow both personally and professionally.
         </p>
 
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+        <p
+          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           Native in <strong>Portuguese</strong> and <strong>English</strong>,
           fluent in <strong>Spanish</strong> and <strong>French</strong>.
         </p>
 
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+        <p
+          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
           I’m actively looking for <strong>internships</strong> and{" "}
           <strong>job opportunities</strong> in software development, eager to
           contribute, learn, and innovate in dynamic and collaborative
