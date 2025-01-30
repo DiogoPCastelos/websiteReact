@@ -67,17 +67,20 @@ const Contact = () => {
       );
   };
 
-  // Expand contact section & ensure it scrolls into view
+  // Expand/collapse smoothly
   const toggleContact = () => {
-    setIsExpanded((prev) => !prev);
-    setTimeout(() => {
-      if (isExpanded && contactRef.current) {
-        contactRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+    setIsExpanded((prev) => {
+      const newState = !prev;
+      if (newState && contactRef.current) {
+        setTimeout(() => {
+          contactRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 300);
       }
-    }, 300);
+      return newState;
+    });
   };
 
   return (
@@ -107,8 +110,9 @@ const Contact = () => {
       {/* Collapsible Content */}
       <motion.div
         animate={{
-          height: isExpanded ? "auto" : 0,
+          maxHeight: isExpanded ? "500px" : "0px", // Max height instead of height
           opacity: isExpanded ? 1 : 0,
+          marginBottom: isExpanded ? "24px" : "0px", // Prevents page jump
           padding: isExpanded ? "24px" : "0px",
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}

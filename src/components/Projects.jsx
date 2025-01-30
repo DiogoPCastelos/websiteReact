@@ -50,7 +50,7 @@ const Projects = () => {
   const techPositions = useMemo(generateTechPositions, []); // Memoize positions
 
   return (
-    <div className="flex flex-col items-center w-full h-fit justify-center space-y-12">
+    <div className="flex flex-col items-center bg-transparent w-full h-fit justify-center space-y-12">
       {projectsData.map((project) => (
         <motion.div
           key={project.id}
