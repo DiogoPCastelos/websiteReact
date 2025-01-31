@@ -1,0 +1,20 @@
+{
+  "name": "Diogo Castelos Portfolio",
+  "short_name": "Diogo Portfolio",
+  "description": "Diogo Piteira Castelos' personal portfolio showcasing projects and skills.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
