@@ -72,17 +72,18 @@ function HomePage() {
     const ctx = canvas.getContext("2d");
     let stars = [];
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      generateStars();
-    };
+    const totalHeight =
+      document.documentElement.scrollHeight || window.innerHeight;
+
+    // 🔹 Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = totalHeight;
 
     const getRandomColor = () => {
       const colors = [
-        "rgba(173, 216, 230, 1)", // Very light blue
-        "rgba(129, 148, 132, 1)", // Very light green
-        "rgba(255, 255, 224, 1)", // Light yellow
+        "rgba(173, 216, 230, 1)", // Light blue
+        "rgba(129, 148, 132, 1)", // Light green
+        "rgba(255, 255, 224, 1)", // Yellow
         "rgba(252, 227, 151, 1)", // Orange
         "rgba(255, 250, 250, 1)", // Soft white
       ];
@@ -93,10 +94,10 @@ function HomePage() {
       stars = Array.from({ length: canvas.width > 800 ? 3000 : 750 }).map(
         () => ({
           x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5, // 1px - 3px
-          brightness: Math.random() * 0.5 + 0.5, // 50% - 100% opacity
-          twinkleSpeed: Math.random() * 0.002 + 0.002, // Twinkle effect
+          y: Math.random() * totalHeight,
+          size: Math.random() * 2 + 0.5,
+          brightness: Math.random() * 0.5 + 0.5,
+          twinkleSpeed: Math.random() * 0.002 + 0.0001,
           color: getRandomColor(),
         })
       );
@@ -104,10 +105,16 @@ function HomePage() {
 
     const drawStars = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const scrollY = window.scrollY; // Get scroll position
+
+      // ⭐ Rotate canvas by 180 degrees (or change this angle as needed)
+      ctx.save();
+      ctx.translate(canvas.width / 2, canvas.height / 2); // Move to center
+      ctx.translate(-canvas.width / 2, -canvas.height / 2); // Move back
+
+      const scrollY = window.scrollY; // Current page scroll
 
       stars.forEach((star) => {
-        const yOffset = star.y + scrollY * 0.3; // Make stars move at a different rate than content
+        const yOffset = star.y - scrollY * 0.2; // 🔥 Reverse scroll effect
         const twinkle = Math.sin(Date.now() * star.twinkleSpeed) * 0.5 + 0.5;
         ctx.fillStyle = star.color.replace(
           "1)",
@@ -116,7 +123,7 @@ function HomePage() {
         ctx.beginPath();
         ctx.arc(
           star.x,
-          yOffset % canvas.height,
+          (yOffset + canvas.height) % canvas.height, // Ensure stars loop correctly
           star.size * (twinkle + 0.5),
           0,
           Math.PI * 2
@@ -124,14 +131,14 @@ function HomePage() {
         ctx.fill();
       });
 
+      ctx.restore(); // Reset transformation
+
       requestAnimationFrame(drawStars);
     };
 
-    resizeCanvas();
+    generateStars();
     drawStars();
-    window.addEventListener("resize", resizeCanvas);
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, []);
+  }, []); // Runs only once
 
   return (
     <div className="relative bg-black min-h-screen overflow-x-hidden text-textPrimary flex flex-col">
