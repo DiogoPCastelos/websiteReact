@@ -35,7 +35,7 @@ function HomePage() {
     // After a small delay, transition from 100vh to auto
     const timeout = setTimeout(() => {
       setAboutHeight("auto");
-    }, 500); // Adjust delay if necessary
+    }, 300); // Adjust delay if necessary
     return () => clearTimeout(timeout);
   }, []);
 
@@ -91,7 +91,7 @@ function HomePage() {
     };
 
     const generateStars = () => {
-      stars = Array.from({ length: canvas.width > 800 ? 3000 : 750 }).map(
+      stars = Array.from({ length: canvas.width > 800 ? 5000 : 750 }).map(
         () => ({
           x: Math.random() * canvas.width,
           y: Math.random() * totalHeight,

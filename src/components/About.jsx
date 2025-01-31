@@ -100,22 +100,10 @@ const About = () => {
         >
           My passion lies in technology and software development, with a
           particular love for <strong>front-end development</strong>, where
-          creativity meets functionality. Outside the tech world, I find
-          inspiration in{" "}
-          <FontAwesomeIcon icon={faSailboat} className="text-blue-300" />{" "}
-          <strong>sailing</strong> and constantly seeking new challenges that
-          push me to grow both personally and professionally. Native in{" "}
-          <strong>Portuguese</strong> and <strong>English</strong>, fluent in{" "}
-          <strong>Spanish</strong> and <strong>French</strong>.
-        </p>
-        <p
-          className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          I am actively looking for <strong>internships</strong> and{" "}
-          <strong>job opportunities</strong> in software development, eager to
-          contribute, learn, and innovate in dynamic and collaborative
-          environments.
+          creativity meets functionality. I am actively looking for{" "}
+          <strong>internships</strong> and <strong>job opportunities</strong> in
+          software development, eager to contribute, learn, and innovate in
+          dynamic and collaborative environments.
         </p>
         <p
           className="italic text-blue-200 sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
