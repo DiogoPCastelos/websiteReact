@@ -73,8 +73,15 @@ function HomePage() {
     let stars = [];
 
     const resizeCanvas = () => {
+      const fullPageHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.scrollHeight,
+        document.body.offsetHeight
+      );
+
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = fullPageHeight; // 🔹 Ensure full page height
       generateStars();
     };
 
@@ -90,13 +97,13 @@ function HomePage() {
     };
 
     const generateStars = () => {
-      stars = Array.from({ length: canvas.width > 800 ? 3000 : 750 }).map(
+      stars = Array.from({ length: canvas.width > 800 ? 6000 : 750 }).map(
         () => ({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           size: Math.random() * 2 + 0.5, // 1px - 3px
           brightness: Math.random() * 0.5 + 0.5, // 50% - 100% opacity
-          twinkleSpeed: Math.random() * 0.002 + 0.002, // Twinkle effect
+          twinkleSpeed: Math.random() * 0.002 + 0.0004, // Twinkle effect
           color: getRandomColor(),
         })
       );
@@ -104,10 +111,10 @@ function HomePage() {
 
     const drawStars = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const scrollY = window.scrollY; // Get scroll position
+      const scrollY = window.scrollY;
 
       stars.forEach((star) => {
-        const yOffset = star.y + scrollY * 0.3; // Make stars move at a different rate than content
+        const yOffset = star.y - scrollY * 0.3; // 🔹 Reversed scroll effect
         const twinkle = Math.sin(Date.now() * star.twinkleSpeed) * 0.5 + 0.5;
         ctx.fillStyle = star.color.replace(
           "1)",
@@ -116,7 +123,7 @@ function HomePage() {
         ctx.beginPath();
         ctx.arc(
           star.x,
-          yOffset % canvas.height,
+          (yOffset + canvas.height) % canvas.height, // 🔹 Ensures stars stay visible
           star.size * (twinkle + 0.5),
           0,
           Math.PI * 2

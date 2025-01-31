@@ -68,7 +68,8 @@ html {
 
 .title-hover:hover {
   color: var(--color-primary);
-  transform: scale(1.05);
+  transform: scale(1.05) translateX(1vh);
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .nav-button {
