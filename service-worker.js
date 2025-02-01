@@ -31,6 +31,8 @@ self.addEventListener("install", (event) => {
         "/images/linux.webp",
         "/images/lua.webp",
         "/images/django.webp",
+        "/images/ava.webp",
+        "/docs/CV - Diogo Piteira Castelos.pdf",
       ]);
     })
   );
