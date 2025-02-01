@@ -4,7 +4,7 @@ self.addEventListener("install", (event) => {
       return cache.addAll([
         "/",
         "/index.html",
-        "/images/favicon.webp", // Cache static assets
+        "favicon.ico", // Cache static assets
       ]);
     })
   );
