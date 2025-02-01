@@ -14,7 +14,12 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/service-worker.js")
-      .then((reg) => console.log("Service Worker registered!", reg))
+      .then((reg) =>
+        console.log(
+          "What are you looking for? Stop looking at the console and just enjoy the website. Yes, image disposition is random in the projects section, yes it is made with react, yes it loads fast, yes the images are webp, yes it's pwa compliant, yes there are too many animations to count, yes most of them are on Math.random() timers, yes it even has a service worker.\n\n If you're a hiring manager, yes, you should hire me.",
+          reg
+        )
+      )
       .catch((err) =>
         console.error("Service Worker registration failed:", err)
       );
