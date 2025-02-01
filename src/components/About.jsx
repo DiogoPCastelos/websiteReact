@@ -98,19 +98,17 @@ const About = () => {
           className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          My passion lies in technology and software development, with a
-          particular love for <strong>front-end development</strong>, where
-          creativity meets functionality. I am actively looking for{" "}
-          <strong>internships</strong> and <strong>job opportunities</strong> in
-          software development, eager to contribute, learn, and innovate in
-          dynamic and collaborative environments.
+          I am actively looking for <strong>internships</strong> and{" "}
+          <strong>job opportunities</strong> in software development, eager to
+          contribute, learn, and innovate in dynamic and collaborative
+          environments.
         </p>
         <p
           className="italic text-blue-200 sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           They say the sky is never the same twice—just like this page. Refresh,
-          and you will get a brand-new sky. Unique to this moment in time we're
+          and you will get a brand-new sky. Unique to this moment in time we are
           sharing.
         </p>
       </motion.div>

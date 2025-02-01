@@ -1,19 +1,14 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { projectsData } from "../constants/constants.js";
-import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const Projects = () => {
   const baseURL = import.meta.env.BASE_URL;
-  const containerSize = {
-    width: window.outerWidth > 800 ? 300 : 300,
-    height: window.outerWidth > 800 ? 500 : 500,
-  };
   const imageSize = 80;
   const minSpacing = 80;
 
-  const generateTechPositions = () => {
+  // Generate random tech positions based on container size
+  const generateTechPositions = (containerSize) => {
     return projectsData.reduce((acc, project) => {
       const usedPositions = [];
       acc[project.id] = project.tech.map(() => {
@@ -40,68 +35,88 @@ const Projects = () => {
     }, {});
   };
 
-  const techPositions = useMemo(generateTechPositions, []);
-
   return (
     <div className="flex flex-col items-center bg-transparent w-full h-fit justify-center space-y-12">
-      {projectsData.map((project) => (
-        <motion.div
-          key={project.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="w-full max-w-4xl p-10 glass-card flex flex-col md:flex-row items-center gap-10 relative"
-        >
-          {/* Description Section (Takes Full Width on Mobile) */}
-          <div className="relative flex-1 max-w-prose z-10">
-            <h2
-              onClick={() => window.open(project.link)}
-              className="text-3xl cursor-pointer font-semibold tracking-tight text-white title-hover relative"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              {project.name}
-            </h2>
-            <p
-              className="mt-4 text-gray-300 z-[30] leading-relaxed text-lg font-inter relative"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              {project.description}
-            </p>
+      {projectsData.map((project) => {
+        const cardRef = useRef(null);
+        const isInView = useInView(cardRef, {
+          triggerOnce: true,
+          threshold: 0.3,
+        });
+        const [containerSize, setContainerSize] = useState({
+          width: 300,
+          height: 500,
+        });
 
-            {/* Tech Stack Icons Overlapping the Description on Mobile */}
-            <div className="absolute inset-0 flex md:hidden justify-center items-center">
-              {techPositions[project.id]?.map(({ x, y, rotate }, index) => (
-                <motion.img
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.85, x, y, rotate }}
-                  animate={{ opacity: 0.6, scale: 1, x, y, rotate }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
-                  whileHover={{ scale: 1.1, rotate: rotate + 5 }}
-                  src={`${baseURL}images/${project.tech[index]}`}
-                  alt={project.tech[index].split(".")[0]}
-                  className="absolute w-[10vh] h-[10vh] object-contain transition-transform opacity-50 filter blur-xs z-[10]"
-                />
-              ))}
+        useEffect(() => {
+          if (cardRef.current) {
+            setContainerSize({
+              width: cardRef.current.getBoundingClientRect().width - 40,
+              height: cardRef.current.getBoundingClientRect().height - 40,
+            });
+          }
+        }, []);
+
+        const techPositions = useMemo(
+          () => generateTechPositions(containerSize),
+          [containerSize]
+        );
+
+        return (
+          <motion.div
+            ref={cardRef}
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="w-full max-w-4xl p-10 z-[30] glass-card flex flex-col md:flex-row items-center gap-10 relative"
+          >
+            {/* Description Section */}
+            <div className="relative z-[10] flex-1 max-w-fit">
+              <h2
+                onClick={() => window.open(project.link)}
+                className="text-3xl cursor-pointer z-[30] font-semibold tracking-tight text-white title-hover relative"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                {project.name}
+              </h2>
+              <p
+                className="mt-4 text-gray-300 w-full z-[30] leading-relaxed text-lg font-inter relative"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                {project.description}
+              </p>
+
+              {/* Tech Stack (Only Appears When Each Card is in View) */}
+              <motion.div
+                className="absolute inset-0 flex justify-center items-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isInView ? 1 : 0 }} // Individual Card Logic
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              >
+                {techPositions[project.id]?.map(({ x, y, rotate }, index) => (
+                  <motion.img
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.85, x, y, rotate }}
+                    animate={{
+                      opacity: isInView ? 1 : 0,
+                      scale: isInView ? 1 : 0,
+                      x,
+                      y,
+                      rotate,
+                    }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    whileHover={{ scale: 1.3 }}
+                    src={`${baseURL}images/${project.tech[index]}`}
+                    alt={project.tech[index].split(".")[0]}
+                    className="absolute blur-[2px] brightness-60 w-[5vh] h-[5vh] object-contain"
+                  />
+                ))}
+              </motion.div>
             </div>
-          </div>
-
-          {/* Tech Stack Icons (Separate on Desktop) */}
-          <div className="relative w-full md:w-1/3 h-[30vh] flex md:justify-center md:items-center hidden md:flex">
-            {techPositions[project.id]?.map(({ x, y, rotate }, index) => (
-              <motion.img
-                key={index}
-                initial={{ opacity: 0, scale: 0.85, x, y, rotate }}
-                animate={{ opacity: 1, scale: 1, x, y, rotate }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-                whileHover={{ scale: 1.1, rotate: rotate + 5 }}
-                src={`${baseURL}images/${project.tech[index]}`}
-                alt={project.tech[index].split(".")[0]}
-                className="absolute w-[6vh] h-[6vh] object-contain transition-transform"
-              />
-            ))}
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        );
+      })}
     </div>
   );
 };

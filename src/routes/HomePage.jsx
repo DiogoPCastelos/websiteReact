@@ -91,16 +91,16 @@ function HomePage() {
     };
 
     const generateStars = () => {
-      stars = Array.from({ length: canvas.width > 800 ? 5000 : 750 }).map(
-        () => ({
-          x: Math.random() * canvas.width,
-          y: Math.random() * totalHeight,
-          size: Math.random() * 2 + 0.5,
-          brightness: Math.random() * 0.5 + 0.5,
-          twinkleSpeed: Math.random() * 0.002 + 0.0001,
-          color: getRandomColor(),
-        })
-      );
+      stars = Array.from({
+        length: canvas.width > 1000 ? 5000 : canvas.width > 800 ? 2000 : 750,
+      }).map(() => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * totalHeight,
+        size: Math.random() * 2 + 0.5,
+        brightness: Math.random() * 0.5 + 0.5,
+        twinkleSpeed: Math.random() * 0.002 + 0.0001,
+        color: getRandomColor(),
+      }));
     };
 
     const drawStars = () => {
@@ -187,7 +187,7 @@ function HomePage() {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-col justify-center overflow-hidden relative z-10">
+      <div className="flex-col mx-0 justify-center overflow-hidden relative z-10">
         <AnimatePresence>
           {aboutVisible && (
             <motion.div
@@ -216,14 +216,10 @@ function HomePage() {
           animate={{ paddingTop: aboutVisible ? "12vh" : "16vh" }}
           transition={{ duration: 1.3 }}
           ref={projectsRef}
-          className="w-full"
+          className="w-full mx-0"
         >
           <Suspense
-            fallback={
-              <div className="text-center text-gray-400">
-                Loading Projects...
-              </div>
-            }
+            fallback={<div className="text-gray-400">Loading Projects...</div>}
           >
             <Projects />
           </Suspense>
