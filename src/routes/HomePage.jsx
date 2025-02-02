@@ -97,8 +97,8 @@ function HomePage() {
         x: Math.random() * canvas.width,
         y: Math.random() * totalHeight,
         size: Math.random() * 2 + 0.5,
-        brightness: Math.random() * 0.5 + 0.5,
-        twinkleSpeed: Math.random() * 0.002 + 0.0001,
+        brightness: Math.random() * 0.8 + 0.2,
+        twinkleSpeed: Math.random() * 0.001 + 0.002,
         color: getRandomColor(),
       }));
     };
@@ -145,7 +145,7 @@ function HomePage() {
       {/* ⭐ Canvas Background (Behind Topbar) */}
       <canvas
         ref={canvasRef}
-        className="fixed top-0 left-0 w-full h-full blur-[1px] pointer-events-none z-[10]"
+        className="fixed top-0 left-0 w-full h-full blur-[3px] pointer-events-none z-[10]"
       />
 
       {/* Topbar (Now Above Starfield) */}
