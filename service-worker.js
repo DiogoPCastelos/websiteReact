@@ -3,8 +3,6 @@ self.addEventListener("install", (event) => {
     caches.open("v1").then((cache) => {
       return cache.addAll([
         "/",
-        "/index.html",
-        "/assets/favicon-CC1poDfo.ico",
         "/images/react.webp",
         "/images/vite.webp",
         "/images/tailwind.webp",
