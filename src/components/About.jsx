@@ -85,7 +85,7 @@ const About = () => {
           className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 21-year-old
+          Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 22-year-old
           Computer Engineering student from Évora, Portugal, currently pursuing
           my <FontAwesomeIcon icon={faComputer} className="text-gray-300" />{" "}
           Engineering degree at the <strong>NOVA University of Lisbon</strong>.
