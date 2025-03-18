@@ -44,16 +44,20 @@ const Projects = () => {
           threshold: 0.3,
         });
         const [containerSize, setContainerSize] = useState({
-          width: 300,
-          height: 500,
+          width: 0,
+          height: 0,
         });
 
         useEffect(() => {
           if (cardRef.current) {
-            setContainerSize({
-              width: cardRef.current.getBoundingClientRect().width - 40,
-              height: cardRef.current.getBoundingClientRect().height - 40,
-            });
+            const timeout = setTimeout(() => {
+              setContainerSize({
+                width: cardRef.current.getBoundingClientRect().width - 40,
+                height: cardRef.current.getBoundingClientRect().height - 40,
+              });
+            }, 300); // 200ms delay before setting dimensions
+
+            return () => clearTimeout(timeout); // Cleanup timeout on unmount
           }
         }, []);
 
