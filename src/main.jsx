@@ -10,6 +10,10 @@ const router = createBrowserRouter(
   { basename: "" } // This is where you set the base path
 );
 
+console.log(
+  "Hi, why are you looking at the console? Nothing to see here! (hopefully?)\nHope you're having a great day! 😄"
+);
+
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .getRegistrations()
