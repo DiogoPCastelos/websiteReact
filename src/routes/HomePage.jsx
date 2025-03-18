@@ -34,7 +34,7 @@ function HomePage() {
   // Transition About from 100vh to auto over 300ms
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setAboutHeight("auto");
+      setAboutHeight("unset");
     }, 300);
     return () => clearTimeout(timeout);
   }, []);
