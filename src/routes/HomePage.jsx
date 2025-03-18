@@ -31,26 +31,23 @@ function HomePage() {
   const contactRef = useRef(null);
   const aboutRef = useRef(null);
 
-  // Switch from 100vh to auto for the About section
   useEffect(() => {
+    // After a small delay, transition from 100vh to auto
     const timeout = setTimeout(() => {
       setAboutHeight("auto");
-    }, 300);
+    }, 300); // Adjust delay if necessary
     return () => clearTimeout(timeout);
   }, []);
 
   const toggleAboutSection = () => {
     setAboutVisible((prev) => {
       setAboutHeight(aboutVisible ? 0 : "auto");
-      if (!aboutVisible) {
-        // If we just opened it, scroll down after a short delay
-        scrollToSection(aboutRef, (12 * window.innerHeight) / 100);
-      }
+      aboutVisible
+        ? ""
+        : scrollToSection(aboutRef, (12 * window.innerHeight) / 100);
       setRotation(aboutVisible ? 0 : 360);
-
       const newState = !prev;
       if (newState) {
-        // Extra scroll to ensure we land properly after opening
         setTimeout(
           () => scrollToSection(aboutRef, (12 * window.innerHeight) / 100),
           300
@@ -60,7 +57,7 @@ function HomePage() {
     });
   };
 
-  // Smooth scrolling to sections
+  // Scroll handlers
   const scrollToSection = useCallback((ref, offset = 0) => {
     if (ref.current) {
       const y =
@@ -75,19 +72,12 @@ function HomePage() {
     const ctx = canvas.getContext("2d");
     let stars = [];
 
-    // 1️⃣ Dynamically update canvas size before drawing
-    const updateCanvasSize = () => {
-      // Use requestAnimationFrame to ensure browser updates size first
-      requestAnimationFrame(() => {
-        canvas.width = window.innerWidth;
-        const totalHeight =
-          document.documentElement.scrollHeight || window.innerHeight;
-        canvas.height = totalHeight;
+    const totalHeight =
+      document.documentElement.scrollHeight || window.innerHeight;
 
-        // 2️⃣ Delay star generation slightly to avoid misalignment
-        setTimeout(() => generateStars(totalHeight), 50);
-      });
-    };
+    // 🔹 Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = totalHeight;
 
     const getRandomColor = () => {
       const colors = [
@@ -100,8 +90,7 @@ function HomePage() {
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
-    const generateStars = (totalHeight) => {
-      // Same logic for star count & sizing as your original code
+    const generateStars = () => {
       stars = Array.from({
         length: canvas.width > 1000 ? 5000 : canvas.width > 800 ? 2000 : 750,
       }).map(() => ({
@@ -117,16 +106,15 @@ function HomePage() {
     const drawStars = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Rotate the canvas by 180° if desired
+      // ⭐ Rotate canvas by 180 degrees (or change this angle as needed)
       ctx.save();
-      ctx.translate(canvas.width / 2, canvas.height / 2);
-      ctx.translate(-canvas.width / 2, -canvas.height / 2);
+      ctx.translate(canvas.width / 2, canvas.height / 2); // Move to center
+      ctx.translate(-canvas.width / 2, -canvas.height / 2); // Move back
 
-      const scrollY = window.scrollY;
+      const scrollY = window.scrollY; // Current page scroll
 
       stars.forEach((star) => {
-        // Slight parallax effect: star.y - scrollY * 0.2
-        const yOffset = star.y - scrollY * 0.2;
+        const yOffset = star.y - scrollY * 0.2; // 🔥 Reverse scroll effect
         const twinkle = Math.sin(Date.now() * star.twinkleSpeed) * 0.5 + 0.5;
         ctx.fillStyle = star.color.replace(
           "1)",
@@ -135,8 +123,7 @@ function HomePage() {
         ctx.beginPath();
         ctx.arc(
           star.x,
-          // Loop the star around the canvas (modulus)
-          (yOffset + canvas.height) % canvas.height,
+          (yOffset + canvas.height) % canvas.height, // Ensure stars loop correctly
           star.size * (twinkle + 0.5),
           0,
           Math.PI * 2
@@ -144,18 +131,14 @@ function HomePage() {
         ctx.fill();
       });
 
-      ctx.restore();
+      ctx.restore(); // Reset transformation
+
       requestAnimationFrame(drawStars);
     };
 
-    updateCanvasSize(); // Initialize size & stars
-    drawStars(); // Start the render loop
-
-    window.addEventListener("resize", updateCanvasSize);
-    return () => {
-      window.removeEventListener("resize", updateCanvasSize);
-    };
-  }, []);
+    generateStars();
+    drawStars();
+  }, []); // Runs only once
 
   return (
     <div className="relative bg-black min-h-screen overflow-x-hidden text-textPrimary flex flex-col">
@@ -210,7 +193,7 @@ function HomePage() {
             <motion.div
               ref={aboutRef}
               initial={{ opacity: 0, height: 0 }} // Start collapsed
-              animate={{ opacity: 1, height: aboutHeight }} // 100vh -> auto
+              animate={{ opacity: 1, height: aboutHeight }} // First 100vh, then auto
               exit={{ opacity: 0, height: 0 }} // Collapse smoothly
               transition={{ duration: 1, ease: "easeInOut" }}
               className="overflow-hidden"
