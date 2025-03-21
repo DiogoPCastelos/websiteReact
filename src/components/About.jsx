@@ -2,10 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TechStack from "./TechStack";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import { faComputer, faSailboat } from "@fortawesome/free-solid-svg-icons";
+import { faComputer } from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
-  const baseURL = import.meta.env.BASE_URL;
+  const today = new Date();
+  const birthDate = new Date("2003-03-11");
+  const age =
+    (today.getMonth() == birthDate.getMonth() &&
+      today.getDate() >= birthDate.getDate()) ||
+    today.getMonth() > birthDate.getMonth()
+      ? today.getFullYear() - birthDate.getFullYear()
+      : today.getFullYear() - birthDate.getFullYear() - 1;
   const fullName = "Diogo Piteira Castelos";
   const [displayedText, setDisplayedText] = useState("");
   const [isBlinking, setIsBlinking] = useState(true);
@@ -85,9 +92,10 @@ const About = () => {
           className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Hi, my name is <strong>Diogo Piteira Castelos</strong>, a 22-year-old
-          Computer Engineering student from Évora, Portugal, currently pursuing
-          my <FontAwesomeIcon icon={faComputer} className="text-gray-300" />{" "}
+          Hi, my name is <strong>Diogo Piteira Castelos</strong>, a {age}
+          -year-old Computer Engineering student from Évora, Portugal, currently
+          pursuing my{" "}
+          <FontAwesomeIcon icon={faComputer} className="text-gray-300" />{" "}
           Engineering degree at the <strong>NOVA University of Lisbon</strong>.
           Alongside my studies, I work as a{" "}
           <strong>Full-Stack Mobile and Web Software Developer</strong> at{" "}
