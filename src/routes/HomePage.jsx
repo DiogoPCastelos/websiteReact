@@ -345,7 +345,7 @@ function HomePage() {
             >
               Diogo Piteira Castelos
             </a>{" "}
-            is licensed under **CC BY-NC-SA 4.0**.
+            is licensed under <a className="font-bold">CC BY-NC-SA 4.0</a>.
           </p>
         </div>
         <div className="text-sm text-gray-400">
