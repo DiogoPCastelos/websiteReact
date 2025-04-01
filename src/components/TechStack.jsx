@@ -1,15 +1,9 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TechStack = () => {
   const baseURL = import.meta.env.BASE_URL; // Dynamically resolve base path
-  const [isTouch, setIsTouch] = useState(false);
   const [rotations, setRotations] = useState({}); // Store rotation state per image
-
-  // Detect if the device is touch-enabled
-  useEffect(() => {
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
 
   // Spring transition config
   const springConfig = {
@@ -29,39 +23,80 @@ const TechStack = () => {
   return (
     <div className="flex flex-wrap justify-center gap-4 p-4">
       {[
-        { src: "react.webp", alt: "react" },
-        { src: "vite.webp", alt: "vite" },
-        { src: "tailwind.webp", alt: "tailwind" },
-        { src: "py.webp", alt: "python" },
-        { src: "c.webp", alt: "c" },
-        { src: "post.webp", alt: "postsql" },
-        { src: "node.webp", alt: "nodejs" },
-        { src: "npm.webp", alt: "npm" },
-        { src: "git.webp", alt: "git" },
-        { src: "figma.webp", alt: "figma" },
-        { src: "js.webp", alt: "js" },
-        { src: "java.webp", alt: "java" },
-        { src: "html.webp", alt: "html" },
-        { src: "css.webp", alt: "css" },
-        { src: "docker.webp", alt: "docker" },
-        { src: "spring.webp", alt: "springboot" },
-        { src: "mongo.webp", alt: "mongodb" },
-        { src: "google.webp", alt: "api" },
-        { src: "discord.webp", alt: "discord" },
-        { src: "bash.webp", alt: "bash" },
-        { src: "asm.webp", alt: "assembly" },
-        { src: "kotlin.webp", alt: "kotlin" },
-        { src: "jira.webp", alt: "jira" },
-        { src: "linux.webp", alt: "linux" },
-        { src: "lua.webp", alt: "lua" },
-        { src: "django.webp", alt: "django" },
-      ].map(({ src, alt }, index) => (
+        { src: "react.webp", alt: "react", link: "https://react.dev/" },
+        { src: "vite.webp", alt: "vite", link: "https://vitejs.dev/" },
+        {
+          src: "tailwind.webp",
+          alt: "tailwind",
+          link: "https://tailwindcss.com/",
+        },
+        { src: "py.webp", alt: "python", link: "https://www.python.org/" },
+        { src: "c.webp", alt: "c", link: "https://www.c-language.org" },
+        {
+          src: "post.webp",
+          alt: "postsql",
+          link: "https://www.postgresql.org/",
+        },
+        {
+          src: "firebase.webp",
+          alt: "firebase",
+          link: "https://firebase.google.com/",
+        },
+        { src: "node.webp", alt: "nodejs", link: "https://nodejs.org/en" },
+        { src: "npm.webp", alt: "npm", link: "http://npmjs.com" },
+        { src: "git.webp", alt: "git", link: "https://git-scm.com" },
+        { src: "figma.webp", alt: "figma", link: "http://figma.com" },
+        {
+          src: "js.webp",
+          alt: "js",
+          link: "https://ecma-international.org/publications-and-standards/standards/ecma-262/",
+        },
+        { src: "java.webp", alt: "java", link: "https://www.java.com/en/" },
+        { src: "html.webp", alt: "html", link: "https://html.spec.whatwg.org" },
+        { src: "css.webp", alt: "css", link: "https://www.w3.org/TR/css/#css" },
+        { src: "docker.webp", alt: "docker", link: "https://docker.com" },
+        {
+          src: "spring.webp",
+          alt: "springboot",
+          link: "https://spring.io/projects/spring-boot",
+        },
+        { src: "mongo.webp", alt: "mongodb", link: "https://www.mongodb.com" },
+        {
+          src: "google.webp",
+          alt: "api",
+          link: "http://console.cloud.google.com",
+        },
+        { src: "discord.webp", alt: "discord", link: "http://discord.com" },
+        {
+          src: "bash.webp",
+          alt: "bash",
+          link: "https://www.gnu.org/software/bash/",
+        },
+        {
+          src: "asm.webp",
+          alt: "assembly",
+          link: "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html",
+        },
+        { src: "kotlin.webp", alt: "kotlin", link: "https://kotlinlang.org" },
+        {
+          src: "jira.webp",
+          alt: "jira",
+          link: "https://www.atlassian.com/software/jira",
+        },
+        { src: "linux.webp", alt: "linux", link: "https://www.linux.org" },
+        { src: "lua.webp", alt: "lua", link: "https://www.lua.org" },
+        {
+          src: "django.webp",
+          alt: "django",
+          link: "https://www.djangoproject.com",
+        },
+      ].map(({ src, alt, link }, index) => (
         <motion.img
           key={index}
-          whileHover={!isTouch ? { rotate: 360 } : {}} // Rotate once on hover
+          whileHover={{ rotate: 360 }} // Rotate once on hover
           animate={{ rotate: rotations[index] || 0 }} // Apply cumulative rotation
           transition={springConfig} // Smooth spring animation
-          onClick={() => isTouch && handleTouchRotate(index)} // Increment rotation on touch
+          onClick={() => window.open(link, "_blank")} // Increment rotation on touch
           src={`${baseURL}images/${src}`}
           alt={alt}
           className="size-[6vh] object-contain cursor-pointer"
