@@ -312,120 +312,122 @@ function HomePage() {
                   <FontAwesomeIcon icon={faTimes} size="lg" />
                 </motion.button>
 
-              <div className="pr-8">
-                <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
-                <p className="text-sm text-gray-400 mb-6">
-                  <strong>Last updated: June 24, 2025</strong>
-                </p>
-
-                <section className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Overview</h2>
-                  <p className="text-gray-300 leading-relaxed">
-                    This website (www.diogopcastelos.pt) uses Google Analytics
-                    to understand how visitors use the site. All data collected
-                    is anonymous and used only for my own personal intertainment
-                    to see how many visits my website gets. No personal
-                    information is collected or stored.
-                  </p>
-                </section>
-
-                <section className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">
-                    What We Collect
-                  </h2>
-                  <ul className="list-disc list-inside text-gray-300 mb-4 ml-4">
-                    <li>Pages visited</li>
-                    <li>Time spent on each page</li>
-                    <li>Device and browser type</li>
-                    <li>General location (country/region)</li>
-                    <li>How you arrived at the site</li>
-                  </ul>
-                </section>
-
-                <section className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Your Consent</h2>
-                  <p className="text-gray-300 leading-relaxed">
-                    When you first visit the site, you can choose whether to
-                    allow analytics tracking. Your choice is stored in your
-                    browser (using localStorage) so we remember it next time.
-                    After some time it will be deleted as your browser forgets
-                    it. The choice stored is mearly a "allow" or "disallow", not
-                    a tracker of any kind. It is not unique to you nor can we
-                    identify any user nor user information with it.
+                <div className="pr-8">
+                  <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
+                  <p className="text-sm text-gray-400 mb-6">
+                    <strong>Last updated: June 24, 2025</strong>
                   </p>
 
-                  <p className="text-gray-300 leading-relaxed mt-4">
-                    You can revoke your consent at all times by pressing the
-                    "Cookies" header at the footer of the page.
-                  </p>
-                </section>
-
-                <section className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Data Sharing</h2>
-                  <p className="text-gray-300 leading-relaxed">
-                    We do <strong>not</strong> sell or share personal data.
-                    Analytics data is processed by Google Analytics according to
-                    their{" "}
-                    <a
-                      href="https://policies.google.com/privacy"
-                      className="text-blue-400 hover:text-blue-300"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      privacy policy
-                    </a>
-                    .
-                  </p>
-                </section>
-
-                <section className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Your Choices</h2>
-                  <ul className="list-disc list-inside text-gray-300 mb-4 ml-4">
-                    <li>
-                      You can block cookies or clear site data via your browser
-                    </li>
-                    <li>
-                      You can opt-out of all cookies by pressing decline, we
-                      don't require cookies to function 😎
-                    </li>
-                    <li>
-                      You can <strong>revoke permission</strong> by pressing the
-                      "Cookies" header in the footer and declining.
-                    </li>
-                  </ul>
-                </section>
-
-                <section className="mb-6">
-                  <h2 className="text-xl font-semibold mb-3">Contact</h2>
-                  <div className="text-gray-300 ml-4">
-                    <p>
-                      <strong>Diogo Piteira Castelos</strong>
+                  <section className="mb-6">
+                    <h2 className="text-xl font-semibold mb-3">Overview</h2>
+                    <p className="text-gray-300 leading-relaxed">
+                      This website (www.diogopcastelos.pt) uses Google Analytics
+                      to understand how visitors use the site. All data
+                      collected is anonymous and used only for my own personal
+                      intertainment to see how many visits my website gets. No
+                      personal information is collected or stored.
                     </p>
-                    <p>Website: www.diogopcastelos.pt</p>
-                    <p>
-                      GitHub:{" "}
+                  </section>
+
+                  <section className="mb-6">
+                    <h2 className="text-xl font-semibold mb-3">
+                      What We Collect
+                    </h2>
+                    <ul className="list-disc list-inside text-gray-300 mb-4 ml-4">
+                      <li>Pages visited</li>
+                      <li>Time spent on each page</li>
+                      <li>Device and browser type</li>
+                      <li>General location (country/region)</li>
+                      <li>How you arrived at the site</li>
+                    </ul>
+                  </section>
+
+                  <section className="mb-6">
+                    <h2 className="text-xl font-semibold mb-3">Your Consent</h2>
+                    <p className="text-gray-300 leading-relaxed">
+                      When you first visit the site, you can choose whether to
+                      allow analytics tracking. Your choice is stored in your
+                      browser (using localStorage) so we remember it next time.
+                      After some time it will be deleted as your browser forgets
+                      it. The choice stored is mearly a "allow" or "disallow",
+                      not a tracker of any kind. It is not unique to you nor can
+                      we identify any user nor user information with it.
+                    </p>
+
+                    <p className="text-gray-300 leading-relaxed mt-4">
+                      You can revoke your consent at all times by pressing the
+                      "Cookies" header at the footer of the page.
+                    </p>
+                  </section>
+
+                  <section className="mb-6">
+                    <h2 className="text-xl font-semibold mb-3">Data Sharing</h2>
+                    <p className="text-gray-300 leading-relaxed">
+                      We do <strong>not</strong> sell or share personal data.
+                      Analytics data is processed by Google Analytics according
+                      to their{" "}
                       <a
-                        href="https://github.com/DiogoPCastelos"
+                        href="https://policies.google.com/privacy"
                         className="text-blue-400 hover:text-blue-300"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        https://github.com/DiogoPCastelos
+                        privacy policy
                       </a>
+                      .
                     </p>
-                  </div>
-                </section>
-                <section>
-                  <h2 className="text-xl font-semibold mb-3">Special Note</h2>
-                  <p className="text-gray-300 leading-relaxed">
-                    Thank you to the EU for making this a requirement, I applaud
-                    the effort to protect user privacy. In an age where tech is
-                    the new frontier, I believe in transparency and the rights
-                    of users to know what data is collected and how it is used.
-                    This policy reflects my commitment to respecting your
-                    privacy while still enjoying the fun of seeing how many
-                    people visit my site.
-                  </p>
-                </section>
-              </div>
+                  </section>
+
+                  <section className="mb-6">
+                    <h2 className="text-xl font-semibold mb-3">Your Choices</h2>
+                    <ul className="list-disc list-inside text-gray-300 mb-4 ml-4">
+                      <li>
+                        You can block cookies or clear site data via your
+                        browser
+                      </li>
+                      <li>
+                        You can opt-out of all cookies by pressing decline, we
+                        don't require cookies to function 😎
+                      </li>
+                      <li>
+                        You can <strong>revoke permission</strong> by pressing
+                        the "Cookies" header in the footer and declining.
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section className="mb-6">
+                    <h2 className="text-xl font-semibold mb-3">Contact</h2>
+                    <div className="text-gray-300 ml-4">
+                      <p>
+                        <strong>Diogo Piteira Castelos</strong>
+                      </p>
+                      <p>Website: www.diogopcastelos.pt</p>
+                      <p>
+                        GitHub:{" "}
+                        <a
+                          href="https://github.com/DiogoPCastelos"
+                          className="text-blue-400 hover:text-blue-300"
+                        >
+                          https://github.com/DiogoPCastelos
+                        </a>
+                      </p>
+                    </div>
+                  </section>
+                  <section>
+                    <h2 className="text-xl font-semibold mb-3">Special Note</h2>
+                    <p className="text-gray-300 leading-relaxed">
+                      Thank you to the EU for making this a requirement, I
+                      applaud the effort to protect user privacy. In an age
+                      where tech is the new frontier, I believe in transparency
+                      and the rights of users to know what data is collected and
+                      how it is used. This policy reflects my commitment to
+                      respecting your privacy while still enjoying the fun of
+                      seeing how many people visit my site.
+                    </p>
+                  </section>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
