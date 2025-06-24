@@ -294,19 +294,23 @@ function HomePage() {
             className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1100] p-4"
             onClick={() => setShowPrivacyPolicy(false)}
           >
-            <motion.div
-              initial={{ scale: 0.8, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.8, y: 50 }}
-              className="bg-neutral-900 text-white rounded-lg max-w-4xl max-h-[80vh] overflow-y-auto p-6 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setShowPrivacyPolicy(false)}
-                className="fixed top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            <motion.div className="relative w-fit h-fit">
+              <motion.div
+                initial={{ scale: 0.8, y: 50 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.8, y: 50 }}
+                className="bg-neutral-900 text-white rounded-lg max-w-4xl max-h-[80vh] overflow-y-auto p-6 "
+                onClick={(e) => e.stopPropagation()}
               >
-                <FontAwesomeIcon icon={faTimes} size="lg" />
-              </button>
+                <motion.button
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  onClick={() => setShowPrivacyPolicy(false)}
+                  className="absolute right-7 text-gray-400 hover:text-white transition-colors"
+                >
+                  <FontAwesomeIcon icon={faTimes} size="lg" />
+                </motion.button>
 
               <div className="pr-8">
                 <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
