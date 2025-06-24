@@ -104,7 +104,7 @@ function HomePage() {
     if (accepted) {
       initAnalytics().then(() => {
         setTimeout(() => {
-          location.reload();
+          window.location.href = window.location.href;
         }, 1000);
       });
       return;
@@ -141,7 +141,7 @@ function HomePage() {
     // Optional: clear session storage if needed
     sessionStorage.clear();
 
-    location.reload();
+    window.location.href = window.location.href;
   };
 
   const initAnalytics = async () => {
