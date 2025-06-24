@@ -79,7 +79,7 @@ const Projects = () => {
             <div className="relative z-[10] flex-1 max-w-fit">
               <h2
                 onClick={() => window.open(project.link)}
-                className="text-3xl cursor-pointer z-[30] font-semibold tracking-tight text-white title-hover relative"
+                className="text-3xl cursor-pointer z-[30] font-semibold tracking-tight text-white title-hover w-fit relative"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 {project.name}
