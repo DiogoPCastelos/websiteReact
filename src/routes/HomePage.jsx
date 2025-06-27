@@ -474,37 +474,43 @@ function HomePage() {
         />
 
         {/* Topbar (Now Above Starfield) */}
-        <nav className="fixed top-0 left-0 w-full z-50 bg-transparent flex justify-between items-center h-[12vh] px-8 backdrop-blur-xl bg-opacity-10">
+        <nav
+          className="fixed top-0 left-0 w-full z-50 h-[12vh] px-8 flex justify-between items-center 
+  bg-white/2 backdrop-blur-[20px] rounded-b-3xl border-b border-white/30 shadow-xl 
+  before:content-[''] before:absolute before:inset-0 before:rounded-b-3xl before:bg-gradient-to-br before:from-white/30 before:to-transparent before:opacity-40 before:pointer-events-none"
+        >
           <motion.button
             animate={{ rotate: rotation }}
             transition={{ duration: 1, ease: "easeOut" }}
             onClick={toggleAboutSection}
+            className="relative z-10"
           >
             <img
               src={`${baseURL}images/ava.webp`}
               alt="Logo"
-              className="h-[8vh] rounded-full shadow-lg"
+              className="h-[8vh] rounded-full shadow-inner border border-white/30 backdrop-blur-md"
             />
           </motion.button>
-          <div className="flex space-x-6 text-lg font-medium">
+
+          <div className="relative z-10 flex space-x-6 text-lg font-medium text-white drop-shadow">
             <button
               onClick={() =>
                 scrollToSection(projectsRef, (12 * window.innerHeight) / 100)
               }
-              className="nav-button"
+              className="nav-button hover:text-green-400 transition duration-200"
             >
               Projects
             </button>
             <button
               onClick={() => scrollToSection(contactRef)}
-              className="nav-button"
+              className="nav-button hover:text-green-400 transition duration-200"
             >
               Contact
             </button>
             <a
               href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
               download
-              className="nav-button hover:text-green-500"
+              className="nav-button hover:text-green-500 transition duration-200"
             >
               CV
             </a>

@@ -15,7 +15,6 @@ const Contact = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const contactRef = useRef(null);
 
-  // Handle cooldown countdown
   useEffect(() => {
     if (cooldown > 0) {
       const timer = setTimeout(() => setCooldown((prev) => prev - 1), 1000);
@@ -67,7 +66,6 @@ const Contact = () => {
       );
   };
 
-  // Expand/collapse smoothly
   const toggleContact = () => {
     setIsExpanded((prev) => {
       const newState = !prev;
@@ -89,13 +87,27 @@ const Contact = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
-      className="relative flex flex-col w-full max-w-lg mx-auto bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg overflow-hidden"
+      className="relative flex flex-col w-full max-w-lg mx-auto
+        bg-white/5 backdrop-blur-[25px] rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.2)]
+        border border-white/25 overflow-hidden
+        before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/30 before:to-transparent
+        before:opacity-40 before:pointer-events-none before:rounded-3xl"
+      style={{
+        WebkitBackdropFilter: "blur(25px)",
+        backdropFilter: "blur(25px)",
+      }}
     >
       {/* Clickable Header */}
       <motion.div
         onClick={toggleContact}
-        className="cursor-pointer bg-gray-800 px-6 py-4 flex justify-between items-center text-white text-xl font-semibold tracking-wide hover:bg-gray-700 transition rounded-2xl"
-        style={{ border: "none", boxShadow: "none" }} // Ensures no border
+        className="relative z-10 cursor-pointer
+          bg-white/10 backdrop-blur-lg border border-white/30
+          px-6 py-4 flex justify-between items-center text-white text-xl font-semibold tracking-wide
+          hover:bg-white/20 transition rounded-3xl select-none"
+        style={{
+          WebkitBackdropFilter: "blur(15px)",
+          backdropFilter: "blur(15px)",
+        }}
       >
         Contact Me
         <motion.span
@@ -110,13 +122,13 @@ const Contact = () => {
       {/* Collapsible Content */}
       <motion.div
         animate={{
-          maxHeight: isExpanded ? "500px" : "0px", // Max height instead of height
+          maxHeight: isExpanded ? "500px" : "0px",
           opacity: isExpanded ? 1 : 0,
-          marginBottom: isExpanded ? "24px" : "0px", // Prevents page jump
+          marginBottom: isExpanded ? "24px" : "0px",
           padding: isExpanded ? "24px" : "0px",
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="overflow-hidden"
+        className="relative z-10 overflow-hidden"
       >
         <p className="text-white text-opacity-80 text-lg text-center">
           Feel free to reach out. I’ll get back to you as soon as possible!
@@ -145,9 +157,15 @@ const Contact = () => {
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
-            className="bg-transparent border-b border-white/30 text-white text-lg focus:outline-none focus:border-primary transition p-2"
+            className="bg-white/10 backdrop-blur-md border-b border-white/30
+              text-white placeholder-white/70 text-lg
+              focus:outline-none focus:border-green-400 transition p-2 rounded-md"
             required
             disabled={isWaiting}
+            style={{
+              WebkitBackdropFilter: "blur(10px)",
+              backdropFilter: "blur(10px)",
+            }}
           />
           <input
             type="email"
@@ -155,9 +173,15 @@ const Contact = () => {
             placeholder="Your Email"
             value={formData.email}
             onChange={handleChange}
-            className="bg-transparent border-b border-white/30 text-white text-lg focus:outline-none focus:border-primary transition p-2"
+            className="bg-white/10 backdrop-blur-md border-b border-white/30
+              text-white placeholder-white/70 text-lg
+              focus:outline-none focus:border-green-400 transition p-2 rounded-md"
             required
             disabled={isWaiting}
+            style={{
+              WebkitBackdropFilter: "blur(10px)",
+              backdropFilter: "blur(10px)",
+            }}
           />
           <textarea
             name="message"
@@ -165,18 +189,25 @@ const Contact = () => {
             placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
-            className="bg-transparent border-b border-white/30 text-white text-lg focus:outline-none focus:border-primary transition p-2"
+            className="bg-white/10 backdrop-blur-md border-b border-white/30
+              text-white placeholder-white/70 text-lg
+              focus:outline-none focus:border-green-400 transition p-2 rounded-md resize-none"
             required
             disabled={isWaiting}
+            style={{
+              WebkitBackdropFilter: "blur(10px)",
+              backdropFilter: "blur(10px)",
+            }}
           ></textarea>
           <motion.button
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className={`w-full py-3 rounded-xl text-lg font-semibold transition ${
-              isWaiting
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-secondary hover:bg-opacity-80"
-            } hover:bg-primary text-white`}
+            className={`w-full py-3 rounded-xl text-lg font-semibold transition
+              ${
+                isWaiting
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-green-500 bg-opacity-80 hover:bg-opacity-100"
+              } text-white shadow-lg`}
             disabled={isWaiting}
           >
             {isWaiting ? "Please Wait..." : "Send Message"}
