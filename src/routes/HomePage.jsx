@@ -518,7 +518,7 @@ function HomePage() {
         </nav>
 
         {/* Main Content */}
-        <div className="flex-col mx-0 justify-center overflow-hidden relative z-10">
+        <div className="flex-col mx-0 md:pt-0 pt-12 justify-center overflow-hidden relative z-10">
           <AnimatePresence>
             {aboutVisible && (
               <motion.div
