@@ -16,6 +16,11 @@ html {
   scroll-behavior: smooth;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
+  background-color: black;
+}
+
+body {
+  background-color: black;
 }
 
 .nav-button {
