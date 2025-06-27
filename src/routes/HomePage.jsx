@@ -236,7 +236,7 @@ function HomePage() {
         return colors[Math.floor(Math.random() * colors.length)];
       };
 
-      const count = width > 1000 ? 5000 : width > 800 ? 2000 : 750;
+      const count = width > 1000 ? 5000 : width > 800 ? 2000 : 500;
       stars = Array.from({ length: count }).map(() => ({
         x: Math.random() * width,
         y: Math.random() * totalHeight,
