@@ -206,7 +206,7 @@ function HomePage() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
 
     const timeout = setTimeout(() => {
       let stars = [];
@@ -247,7 +247,9 @@ function HomePage() {
       }));
 
       const drawStars = () => {
-        ctx.clearRect(0, 0, width, totalHeight);
+        // Fill the canvas with black
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, width, totalHeight);
 
         ctx.save();
         ctx.translate(width / 2, totalHeight / 2);
