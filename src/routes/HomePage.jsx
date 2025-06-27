@@ -578,7 +578,7 @@ function HomePage() {
         </div>
 
         {/* Footer */}
-        <footer className="text-center py-4">
+        <footer className="text-center z-50 py-4">
           <div className="flex justify-center space-x-6 mb-2">
             <FontAwesomeIcon
               size="3x"
