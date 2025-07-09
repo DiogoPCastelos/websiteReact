@@ -16,11 +16,7 @@ import {
 import { faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { initializeApp } from "firebase/app";
-
-// Lazy Load Components
-const About = lazy(() => import("../components/About"));
-const Projects = lazy(() => import("../components/Projects"));
-const Contact = lazy(() => import("../components/Contact"));
+import { About, Projects, Contact } from "../components";
 
 // Firebase config (replace with your values)
 const firebaseConfig = {
@@ -286,33 +282,65 @@ function HomePage() {
 
   return (
     <div className="relative bg-black min-h-screen overflow-x-hidden text-textPrimary flex flex-col">
-      {/* Privacy Policy Popup */}
-      <AnimatePresence>
-        {showPrivacyPolicy && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1100] p-4"
+      {showPrivacyPolicy && (
+        <>
+          <style>{`
+      @keyframes fadeIn {
+        from { opacity: 0 }
+        to { opacity: 1 }
+      }
+      @keyframes fadeOut {
+        from { opacity: 1 }
+        to { opacity: 0 }
+      }
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8) translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+      @keyframes scaleOut {
+        from {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.8) translateY(50px);
+        }
+      }
+    `}</style>
+
+          <div
             onClick={() => setShowPrivacyPolicy(false)}
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1100] p-4"
+            style={{ animation: "fadeIn 0.5s ease-out forwards" }}
           >
-            <motion.div className="relative w-fit h-fit">
-              <motion.div
-                initial={{ scale: 0.8, y: 50 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.8, y: 50 }}
-                className="bg-neutral-900 text-white rounded-lg max-w-4xl max-h-[80vh] overflow-y-auto p-6 "
+            <div
+              className="relative w-fit h-fit"
+              style={{
+                animation: "scaleIn 0.5s ease-out forwards",
+                transformOrigin: "center",
+              }}
+            >
+              <div
                 onClick={(e) => e.stopPropagation()}
+                className="bg-neutral-900 text-white rounded-lg max-w-4xl max-h-[80vh] overflow-y-auto p-6"
               >
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
+                <button
                   onClick={() => setShowPrivacyPolicy(false)}
                   className="absolute right-7 text-gray-400 hover:text-white transition-colors"
+                  style={{
+                    animation: "fadeIn 0.5s ease-out 1s forwards",
+                    opacity: 0,
+                  }}
                 >
                   <FontAwesomeIcon icon={faTimes} size="lg" />
-                </motion.button>
+                </button>
 
                 <div className="pr-8">
                   <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
@@ -355,7 +383,6 @@ function HomePage() {
                       not a tracker of any kind. It is not unique to you nor can
                       we identify any user nor user information with it.
                     </p>
-
                     <p className="text-gray-300 leading-relaxed mt-4">
                       You can revoke your consent at all times by pressing the
                       "Cookies" header at the footer of the page.
@@ -416,6 +443,7 @@ function HomePage() {
                       </p>
                     </div>
                   </section>
+
                   <section>
                     <h2 className="text-xl font-semibold mb-3">Special Note</h2>
                     <p className="text-gray-300 leading-relaxed">
@@ -429,11 +457,11 @@ function HomePage() {
                     </p>
                   </section>
                 </div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Cookie Consent Banner */}
       {showConsent && (
@@ -477,22 +505,23 @@ function HomePage() {
 
         {/* Topbar (Now Above Starfield) */}
         <nav
-          className="fixed top-0 left-0 w-full z-50 h-[12vh] px-8 flex justify-between items-center 
-  bg-white/2 backdrop-blur-[20px] rounded-b-3xl border-b border-white/30 shadow-xl 
-  before:content-[''] before:absolute before:inset-0 before:rounded-b-3xl before:bg-gradient-to-br before:from-white/30 before:to-transparent before:opacity-40 before:pointer-events-none"
+          className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] z-50 h-[12vh] px-8 flex justify-between items-center
+  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] border-white/30 shadow-xl drop-shadow-color-black overflow-hidden
+  before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-br before:from-white/10 before:to-transparent before:pointer-events-none
+  after:content-[''] after:absolute after:inset-0 after:bg-[url('/images/figma_texture_glass.png')] after:bg-cover after:opacity-20 after:rounded-3xl after:pointer-events-none after:mix-blend-overlay"
         >
-          <motion.button
-            animate={{ rotate: rotation }}
-            transition={{ duration: 1, ease: "easeOut" }}
+          <button
             onClick={toggleAboutSection}
-            className="relative z-10"
+            className={`relative z-10 transition-transform duration-1000 ease-out ${
+              rotation === 360 ? "rotate-[360deg]" : "rotate-0"
+            }`}
           >
             <img
               src={`${baseURL}images/ava.webp`}
               alt="Logo"
               className="h-[8vh] rounded-full shadow-inner border border-white/30 backdrop-blur-md"
             />
-          </motion.button>
+          </button>
 
           <div className="relative z-10 flex space-x-6 text-lg font-medium text-white drop-shadow">
             <button
@@ -531,49 +560,27 @@ function HomePage() {
                 transition={{ duration: 1, ease: "easeInOut" }}
                 className="overflow-hidden"
               >
-                <Suspense
-                  fallback={
-                    <div className="text-center text-gray-400">
-                      Loading About...
-                    </div>
-                  }
-                >
-                  <About />
-                </Suspense>
+                <About />
               </motion.div>
             )}
           </AnimatePresence>
 
           {/* Projects Section */}
-          <motion.div
-            animate={{ paddingTop: aboutVisible ? "12vh" : "16vh" }}
-            transition={{ duration: 1.3 }}
+          <div
             ref={projectsRef}
-            className="w-full mx-0"
+            className={`w-full mx-0 transition-all duration-1000 ease-in-out ${
+              aboutVisible ? "pt-[12vh]" : "pt-[16vh]"
+            }`}
           >
-            <Suspense
-              fallback={
-                <div className="text-gray-400">Loading Projects...</div>
-              }
-            >
-              <Projects />
-            </Suspense>
-          </motion.div>
+            <Projects />
+          </div>
 
           {/* Contact Section */}
           <div
             ref={contactRef}
             className="max-w-screen-lg opacity-100 max-h-[100vh] mx-auto py-4"
           >
-            <Suspense
-              fallback={
-                <div className="text-center text-gray-400">
-                  Loading Contact...
-                </div>
-              }
-            >
-              <Contact />
-            </Suspense>
+            <Contact />
           </div>
         </div>
 
