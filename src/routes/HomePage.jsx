@@ -145,8 +145,8 @@ function HomePage() {
 
         {/* Topbar (Now Above Starfield) */}
         <nav
-          className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] z-50 h-[12vh] px-8 flex justify-between items-center
-  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] bg-white/2 border-white/30 shadow-[inset_0.5px_1px_0px_rgba(255,255,255,0.6)] overflow-hidden
+          className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] z-50 fit py-4 px-8 flex justify-between items-center
+  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] bg-white/2 border-white/30 shadow-[inset_1px_1.78px_0px_rgba(255,255,255,0.6)] overflow-hidden
   before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-[url('/images/figma_texture_glass.png')] before:opacity-20 before:pointer-events-none before:mix-blend-lighten
 "
         >
@@ -159,29 +159,29 @@ function HomePage() {
             <img
               src={`${baseURL}images/ava.webp`}
               alt="Logo"
-              className="h-[8vh] rounded-full shadow-inner border border-white/30 backdrop-blur-md"
+              className="h-[6vh] sm:h-[8vh] rounded-full shadow-inner border border-white/30 backdrop-blur-md"
             />
           </button>
 
-          <div className="relative z-10 flex space-x-4 text-base font-semibold text-white">
+          <div className="relative z-10 flex space-x-2 sm:space-x-8 text-base font-semibold text-white">
             <button
               onClick={() =>
                 scrollToSection(projectsRef, (12 * window.innerHeight) / 100)
               }
-              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
+              className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
             >
               Projects
             </button>
             <button
               onClick={() => scrollToSection(contactRef)}
-              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
+              className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
             >
               Contact
             </button>
             <a
               href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
               download
-              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
+              className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
             >
               CV
             </a>
