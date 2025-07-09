@@ -1,11 +1,4 @@
-import {
-  useState,
-  useRef,
-  lazy,
-  Suspense,
-  useCallback,
-  useEffect,
-} from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faReact,
@@ -13,158 +6,19 @@ import {
   faGithub,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
-import { initializeApp } from "firebase/app";
 import { About, Projects, Contact } from "../components";
-
-// Firebase config (replace with your values)
-const firebaseConfig = {
-  apiKey: "AIzaSyDN1QLdt2nfT8EiTeFwmOJbBWQGmGSFWhw",
-  authDomain: "websitereact-cd7e9.firebaseapp.com",
-  projectId: "websitereact-cd7e9",
-  storageBucket: "websitereact-cd7e9.firebasestorage.app",
-  messagingSenderId: "629387179127",
-  appId: "1:629387179127:web:678483370ad04faa688272",
-  measurementId: "G-7XD00JQPCT",
-};
-
-let app = null;
-let analyticsInitialized = false;
-let firebaseEnabled = true;
-
-// Initialize Firebase app with error handling
-try {
-  app = initializeApp(firebaseConfig);
-} catch (error) {
-  console.error("Failed to initialize Firebase app:", error);
-  firebaseEnabled = false;
-}
 
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
   const [aboutVisible, setAboutVisible] = useState(true);
   const [rotation, setRotation] = useState(360);
   const [aboutHeight, setAboutHeight] = useState("100vh");
-  const [showConsent, setShowConsent] = useState(false);
-  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
 
   const canvasRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
   const aboutRef = useRef(null);
-
-  useEffect(() => {
-    const consent = localStorage.getItem("analytics-consent");
-    if (consent === null) {
-      setShowConsent(true);
-    } else if (consent === "true") {
-      initAnalytics();
-    } else if (consent === "false") {
-      if (window.indexedDB && window.indexedDB.deleteDatabase) {
-        const fbDatabases = [
-          "firebaseLocalStorageDb",
-          "firebase-installations-database",
-          "firebase-heartbeat-database",
-        ];
-        fbDatabases.forEach((dbName) => {
-          window.indexedDB.deleteDatabase(dbName);
-        });
-      }
-
-      // Delete specific Firebase-related cookies (e.g., those starting with "firebase")
-      document.cookie.split(";").forEach((cookie) => {
-        const cookieName = cookie.trim().split("=")[0];
-        if (cookieName.toLowerCase().startsWith("firebase")) {
-          document.cookie =
-            cookieName + `=;expires=${new Date(0).toUTCString()};path=/`;
-        }
-      });
-
-      // Delete all cookies as an extra cleanup step
-      document.cookie.split(";").forEach((c) => {
-        const cookieName = c.trim().split("=")[0];
-        document.cookie =
-          cookieName + `=;expires=${new Date(0).toUTCString()};path=/`;
-      });
-
-      // Optional: clear session storage if needed
-      sessionStorage.clear();
-    }
-  }, []);
-
-  const handleConsent = (accepted) => {
-    setShowConsent(false);
-    localStorage.setItem("analytics-consent", accepted ? "true" : "false");
-
-    if (accepted) {
-      initAnalytics().then(() => {
-        setTimeout(() => {
-          window.location.href = window.location.href;
-        }, 1000);
-      });
-      return;
-    }
-
-    // Delete Firebase-related IndexedDB databases
-    if (window.indexedDB && window.indexedDB.deleteDatabase) {
-      const fbDatabases = [
-        "firebaseLocalStorageDb",
-        "firebase-installations-database",
-        "firebase-heartbeat-database",
-      ];
-      fbDatabases.forEach((dbName) => {
-        window.indexedDB.deleteDatabase(dbName);
-      });
-    }
-
-    // Delete specific Firebase-related cookies (e.g., those starting with "firebase")
-    document.cookie.split(";").forEach((cookie) => {
-      const cookieName = cookie.trim().split("=")[0];
-      if (cookieName.toLowerCase().startsWith("firebase")) {
-        document.cookie =
-          cookieName + `=;expires=${new Date(0).toUTCString()};path=/`;
-      }
-    });
-
-    // Delete all cookies as an extra cleanup step
-    document.cookie.split(";").forEach((c) => {
-      const cookieName = c.trim().split("=")[0];
-      document.cookie =
-        cookieName + `=;expires=${new Date(0).toUTCString()};path=/`;
-    });
-
-    // Optional: clear session storage if needed
-    sessionStorage.clear();
-
-    window.location.href = window.location.href;
-  };
-
-  const initAnalytics = async () => {
-    if (analyticsInitialized || !firebaseEnabled || !app) return;
-
-    try {
-      analyticsInitialized = true;
-
-      // Initialize Analytics with error handling
-      const { getAnalytics, isSupported } = await import("firebase/analytics");
-
-      // Check if Analytics is supported
-      const supported = await isSupported();
-      if (!supported) {
-        console.log("Firebase Analytics not supported in this environment");
-        return;
-      }
-
-      // Initialize analytics with minimal configuration
-      const analytics = getAnalytics(app);
-      console.log("✅ Firebase Analytics initialized successfully");
-    } catch (error) {
-      console.error("❌ Firebase Analytics initialization failed:", error);
-      firebaseEnabled = false;
-      // Silently fail to prevent app crashes
-    }
-  };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -282,220 +136,6 @@ function HomePage() {
 
   return (
     <div className="relative bg-black min-h-screen overflow-x-hidden text-textPrimary flex flex-col">
-      {showPrivacyPolicy && (
-        <>
-          <style>{`
-      @keyframes fadeIn {
-        from { opacity: 0 }
-        to { opacity: 1 }
-      }
-      @keyframes fadeOut {
-        from { opacity: 1 }
-        to { opacity: 0 }
-      }
-      @keyframes scaleIn {
-        from {
-          opacity: 0;
-          transform: scale(0.8) translateY(50px);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1) translateY(0);
-        }
-      }
-      @keyframes scaleOut {
-        from {
-          opacity: 1;
-          transform: scale(1) translateY(0);
-        }
-        to {
-          opacity: 0;
-          transform: scale(0.8) translateY(50px);
-        }
-      }
-    `}</style>
-
-          <div
-            onClick={() => setShowPrivacyPolicy(false)}
-            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[1100] p-4"
-            style={{ animation: "fadeIn 0.5s ease-out forwards" }}
-          >
-            <div
-              className="relative w-fit h-fit"
-              style={{
-                animation: "scaleIn 0.5s ease-out forwards",
-                transformOrigin: "center",
-              }}
-            >
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="bg-neutral-900 text-white rounded-lg max-w-4xl max-h-[80vh] overflow-y-auto p-6"
-              >
-                <button
-                  onClick={() => setShowPrivacyPolicy(false)}
-                  className="absolute right-7 text-gray-400 hover:text-white transition-colors"
-                  style={{
-                    animation: "fadeIn 0.5s ease-out 1s forwards",
-                    opacity: 0,
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTimes} size="lg" />
-                </button>
-
-                <div className="pr-8">
-                  <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
-                  <p className="text-sm text-gray-400 mb-6">
-                    <strong>Last updated: June 24, 2025</strong>
-                  </p>
-
-                  <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-3">Overview</h2>
-                    <p className="text-gray-300 leading-relaxed">
-                      This website (www.diogopcastelos.pt) uses Google Analytics
-                      to understand how visitors use the site. All data
-                      collected is anonymous and used only for my own personal
-                      intertainment to see how many visits my website gets. No
-                      personal information is collected or stored.
-                    </p>
-                  </section>
-
-                  <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-3">
-                      What We Collect
-                    </h2>
-                    <ul className="list-disc list-inside text-gray-300 mb-4 ml-4">
-                      <li>Pages visited</li>
-                      <li>Time spent on each page</li>
-                      <li>Device and browser type</li>
-                      <li>General location (country/region)</li>
-                      <li>How you arrived at the site</li>
-                    </ul>
-                  </section>
-
-                  <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-3">Your Consent</h2>
-                    <p className="text-gray-300 leading-relaxed">
-                      When you first visit the site, you can choose whether to
-                      allow analytics tracking. Your choice is stored in your
-                      browser (using localStorage) so we remember it next time.
-                      After some time it will be deleted as your browser forgets
-                      it. The choice stored is mearly a "allow" or "disallow",
-                      not a tracker of any kind. It is not unique to you nor can
-                      we identify any user nor user information with it.
-                    </p>
-                    <p className="text-gray-300 leading-relaxed mt-4">
-                      You can revoke your consent at all times by pressing the
-                      "Cookies" header at the footer of the page.
-                    </p>
-                  </section>
-
-                  <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-3">Data Sharing</h2>
-                    <p className="text-gray-300 leading-relaxed">
-                      We do <strong>not</strong> sell or share personal data.
-                      Analytics data is processed by Google Analytics according
-                      to their{" "}
-                      <a
-                        href="https://policies.google.com/privacy"
-                        className="text-blue-400 hover:text-blue-300"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        privacy policy
-                      </a>
-                      .
-                    </p>
-                  </section>
-
-                  <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-3">Your Choices</h2>
-                    <ul className="list-disc list-inside text-gray-300 mb-4 ml-4">
-                      <li>
-                        You can block cookies or clear site data via your
-                        browser
-                      </li>
-                      <li>
-                        You can opt-out of all cookies by pressing decline, we
-                        don't require cookies to function 😎
-                      </li>
-                      <li>
-                        You can <strong>revoke permission</strong> by pressing
-                        the "Cookies" header in the footer and declining.
-                      </li>
-                    </ul>
-                  </section>
-
-                  <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-3">Contact</h2>
-                    <div className="text-gray-300 ml-4">
-                      <p>
-                        <strong>Diogo Piteira Castelos</strong>
-                      </p>
-                      <p>Website: www.diogopcastelos.pt</p>
-                      <p>
-                        GitHub:{" "}
-                        <a
-                          href="https://github.com/DiogoPCastelos"
-                          className="text-blue-400 hover:text-blue-300"
-                        >
-                          https://github.com/DiogoPCastelos
-                        </a>
-                      </p>
-                    </div>
-                  </section>
-
-                  <section>
-                    <h2 className="text-xl font-semibold mb-3">Special Note</h2>
-                    <p className="text-gray-300 leading-relaxed">
-                      Thank you to the EU for making this a requirement, I
-                      applaud the effort to protect user privacy. In an age
-                      where tech is the new frontier, I believe in transparency
-                      and the rights of users to know what data is collected and
-                      how it is used. This policy reflects my commitment to
-                      respecting your privacy while still enjoying the fun of
-                      seeing how many people visit my site.
-                    </p>
-                  </section>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* Cookie Consent Banner */}
-      {showConsent && (
-        <div className="fixed bottom-0 left-0 right-0 bg-neutral-800 text-white p-4 z-[1000] flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 flex-1">
-            <span className="text-sm">
-              We use cookies exclusively for analytics purposes, I like to see
-              how many visits my website gets 😄.
-            </span>
-            <button
-              onClick={() => setShowPrivacyPolicy(true)}
-              className="text-blue-400 hover:text-blue-300 transition-colors"
-              title="Privacy Policy"
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-            </button>
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => handleConsent(true)}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors"
-            >
-              Accept
-            </button>
-            <button
-              onClick={() => handleConsent(false)}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors"
-            >
-              Decline
-            </button>
-          </div>
-        </div>
-      )}
-
       <div className="relative bg-black min-h-screen overflow-x-hidden text-textPrimary flex flex-col">
         {/* ⭐ Canvas Background (Behind Topbar) */}
         <canvas
@@ -506,9 +146,9 @@ function HomePage() {
         {/* Topbar (Now Above Starfield) */}
         <nav
           className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] z-50 h-[12vh] px-8 flex justify-between items-center
-  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] border-white/30 shadow-xl drop-shadow-color-black overflow-hidden
-  before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-br before:from-white/10 before:to-transparent before:pointer-events-none
-  after:content-[''] after:absolute after:inset-0 after:bg-[url('/images/figma_texture_glass.png')] after:bg-cover after:opacity-20 after:rounded-3xl after:pointer-events-none after:mix-blend-overlay"
+  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] bg-white/2 border-white/30 shadow-[inset_0.5px_1px_0px_rgba(255,255,255,0.6)] overflow-hidden
+  before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-[url('/images/figma_texture_glass.png')] before:opacity-20 before:pointer-events-none before:mix-blend-lighten
+"
         >
           <button
             onClick={toggleAboutSection}
@@ -523,25 +163,25 @@ function HomePage() {
             />
           </button>
 
-          <div className="relative z-10 flex space-x-6 text-lg font-medium text-white drop-shadow">
+          <div className="relative z-10 flex space-x-4 text-base font-semibold text-white">
             <button
               onClick={() =>
                 scrollToSection(projectsRef, (12 * window.innerHeight) / 100)
               }
-              className="nav-button hover:text-green-400 transition duration-200"
+              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
             >
               Projects
             </button>
             <button
               onClick={() => scrollToSection(contactRef)}
-              className="nav-button hover:text-green-400 transition duration-200"
+              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
             >
               Contact
             </button>
             <a
               href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
               download
-              className="nav-button hover:text-green-500 transition duration-200"
+              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-transparent transition-all duration-300 backdrop-blur-md border border-white/20 shadow-inner shadow-white shadow-sm"
             >
               CV
             </a>
@@ -568,7 +208,7 @@ function HomePage() {
           {/* Projects Section */}
           <div
             ref={projectsRef}
-            className={`w-full mx-0 transition-all duration-1000 ease-in-out ${
+            className={`w-full px-4 transition-all duration-1000 ease-in-out ${
               aboutVisible ? "pt-[12vh]" : "pt-[16vh]"
             }`}
           >
@@ -578,7 +218,7 @@ function HomePage() {
           {/* Contact Section */}
           <div
             ref={contactRef}
-            className="max-w-screen-lg opacity-100 max-h-[100vh] mx-auto py-4"
+            className="max-w-screen-lg opacity-100 max-h-[100vh] mx-auto pt-24 py-4"
           >
             <Contact />
           </div>
@@ -677,12 +317,6 @@ function HomePage() {
           </div>
           <div className="text-sm text-gray-400">
             Made with Vite <FontAwesomeIcon icon={faReact} /> + TailwindCSS
-          </div>
-          <div
-            className="text-sm text-gray-400 cursor-pointer"
-            onClick={() => setShowConsent(true)}
-          >
-            Cookies
           </div>
         </footer>
       </div>

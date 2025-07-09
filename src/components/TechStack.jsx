@@ -1,23 +1,13 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const TechStack = () => {
   const baseURL = import.meta.env.BASE_URL; // Dynamically resolve base path
-  const [rotations, setRotations] = useState({}); // Store rotation state per image
 
   // Spring transition config
   const springConfig = {
     type: "spring",
     stiffness: 50,
     damping: 5,
-  };
-
-  // Handle touch rotation (increments rotation by +360°)
-  const handleTouchRotate = (index) => {
-    setRotations((prev) => ({
-      ...prev,
-      [index]: (prev[index] || 0) + 360, // Increase rotation by +360°
-    }));
   };
 
   return (
@@ -94,7 +84,6 @@ const TechStack = () => {
         <motion.img
           key={index}
           whileHover={{ rotate: 360 }} // Rotate once on hover
-          animate={{ rotate: rotations[index] || 0 }} // Apply cumulative rotation
           transition={springConfig} // Smooth spring animation
           onClick={() => window.open(link, "_blank")} // Increment rotation on touch
           src={`${baseURL}images/${src}`}

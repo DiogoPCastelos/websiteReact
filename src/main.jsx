@@ -1,10 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import HomePage from "./routes/HomePage";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
-// Router setup
+const firebaseConfig = {
+  apiKey: "AIzaSyDN1QLdt2nfT8EiTeFwmOJbBWQGmGSFWhw",
+  authDomain: "websitereact-cd7e9.firebaseapp.com",
+  projectId: "websitereact-cd7e9",
+  storageBucket: "websitereact-cd7e9.firebasestorage.app",
+  messagingSenderId: "629387179127",
+  appId: "1:629387179127:web:678483370ad04faa688272",
+  measurementId: "G-7XD00JQPCT",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+getAnalytics(app);
+
 const router = createBrowserRouter([{ path: "/", element: <HomePage /> }], {
   basename: "",
 });

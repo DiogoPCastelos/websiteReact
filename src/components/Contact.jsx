@@ -82,26 +82,20 @@ const Contact = () => {
   };
 
   return (
-    <motion.div
+    <div
       ref={contactRef}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.2, ease: "easeOut" }}
-      className="relative flex flex-col w-full max-w-lg mx-auto
-        bg-white/5 backdrop-blur-[25px] rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.2)]
-        border border-white/25 overflow-hidden
-        before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/30 before:to-transparent
-        before:opacity-40 before:pointer-events-none before:rounded-3xl"
-      style={{
-        WebkitBackdropFilter: "blur(25px)",
-        backdropFilter: "blur(25px)",
-      }}
+      className={`relative flex flex-col w-full max-w-lg mx-auto
+    bg-white/5 backdrop-blur-[25px] rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.2)]
+    border border-white/25 overflow-hidden
+    before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/30 before:to-transparent
+    before:opacity-40 before:pointer-events-none before:rounded-3xl
+  `}
     >
       {/* Clickable Header */}
-      <motion.div
+      <div
         onClick={toggleContact}
-        className="relative z-10 cursor-pointer
-          bg-white/10 backdrop-blur-lg border border-white/30
+        className="relative z-20 cursor-pointer
+          bg-white/10 backdrop-blur-lg drop-shadow border border-white/30
           px-6 py-4 flex justify-between items-center text-white text-xl font-semibold tracking-wide
           hover:bg-white/20 transition rounded-3xl select-none"
         style={{
@@ -110,25 +104,22 @@ const Contact = () => {
         }}
       >
         Contact Me
-        <motion.span
-          animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-lg"
+        <span
+          className={`text-lg inline-block transition-transform duration-300 ease-out ${
+            isExpanded ? "rotate-180" : ""
+          }`}
         >
           ▼
-        </motion.span>
-      </motion.div>
+        </span>
+      </div>
 
       {/* Collapsible Content */}
-      <motion.div
-        animate={{
-          maxHeight: isExpanded ? "500px" : "0px",
-          opacity: isExpanded ? 1 : 0,
-          marginBottom: isExpanded ? "24px" : "0px",
-          padding: isExpanded ? "24px" : "0px",
-        }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="relative z-10 overflow-hidden"
+      <div
+        className={`relative z-10 overflow-hidden transition-all duration-500 ease-in-out ${
+          isExpanded
+            ? "max-h-[500px] opacity-100 mb-6 p-6"
+            : "max-h-0 opacity-0 mb-0 p-0"
+        }`}
       >
         <p className="text-white text-opacity-80 text-lg text-center">
           Feel free to reach out. I’ll get back to you as soon as possible!
@@ -199,8 +190,7 @@ const Contact = () => {
               backdropFilter: "blur(10px)",
             }}
           ></textarea>
-          <motion.button
-            whileTap={{ scale: 0.95 }}
+          <button
             type="submit"
             className={`w-full py-3 rounded-xl text-lg font-semibold transition
               ${
@@ -211,10 +201,10 @@ const Contact = () => {
             disabled={isWaiting}
           >
             {isWaiting ? "Please Wait..." : "Send Message"}
-          </motion.button>
+          </button>
         </form>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

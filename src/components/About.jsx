@@ -86,10 +86,10 @@ const About = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: window.outerWidth > 800 ? 30 : 0 }}
         transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-        className="flex-1 flex flex-col justify-center text-white space-y-2 sm:space-y-4 lg:space-y-6 max-w-full"
+        className="flex-1 flex flex-col justify-center px-8 sm:px-0 text-white space-y-2 sm:space-y-4 lg:space-y-6 max-w-full"
       >
         <p
-          className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+          className="sm:text-block text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Hi, my name is <strong>Diogo Piteira Castelos</strong>, a {age}
@@ -103,7 +103,7 @@ const About = () => {
         </p>
 
         <p
-          className="hidden sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
+          className="hidden sm:block text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           I am actively looking for <strong>internships</strong> and{" "}
@@ -112,7 +112,7 @@ const About = () => {
           environments.
         </p>
         <p
-          className="italic text-blue-200 sm:block text-sm md:text-lg lg:text-xl leading-relaxed"
+          className="italic text-blue-200 sm:block text-xl leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           They say the sky is never the same twice—just like this page. Refresh,
