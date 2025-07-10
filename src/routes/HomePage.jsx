@@ -146,7 +146,7 @@ function HomePage() {
         {/* Topbar (Now Above Starfield) */}
         <nav
           className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] z-50 fit py-4 px-8 flex justify-between items-center
-  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] bg-white/2 border-white/30 shadow-[inset_1px_1px_0px_rgba(255,255,255,0.6)] sm:shadow-[inset_1px_1.78px_0px_rgba(255,255,255,0.6)] overflow-hidden
+  backdrop-blur-[1px] rounded-3xl border-b-[0.2px] border-r-[0.2px] bg-white/2 border-white/30 shadow-[inset_0.6px_0.7px_0px_rgba(255,255,255,0.6)] sm:shadow-[inset_1px_1.78px_0px_rgba(255,255,255,0.6)] overflow-hidden
   before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-[url('/images/figma_texture_glass.png')] before:opacity-20 before:pointer-events-none before:mix-blend-lighten
 "
         >
