@@ -17,6 +17,7 @@ html {
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   background-color: black;
+  scrollbar-width: thin;
 }
 
 body {
