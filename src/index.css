@@ -14,7 +14,9 @@
 /* Smooth scrolling with Apple-like momentum */
 html {
   scroll-behavior: smooth;
-  overscroll-behavior: none;
+  /* Remove or modify overscroll-behavior to allow pull-to-refresh */
+  overscroll-behavior-x: none; /* Prevent horizontal overscroll only */
+  overscroll-behavior-y: auto; /* Allow vertical overscroll for pull-to-refresh */
   -webkit-overflow-scrolling: touch;
   background-color: black;
   scrollbar-width: thin;
