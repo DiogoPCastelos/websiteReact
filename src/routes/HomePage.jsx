@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { About, Projects, Contact } from "../components";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const baseURL = import.meta.env.BASE_URL;
@@ -15,6 +16,7 @@ function HomePage() {
   const [rotation, setRotation] = useState(360);
   const [aboutHeight, setAboutHeight] = useState("100vh");
 
+  const navigate = useNavigate();
   const canvasRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
@@ -165,18 +167,10 @@ function HomePage() {
 
           <div className="relative z-10 flex space-x-2 sm:space-x-8 text-base font-semibold text-white">
             <button
-              onClick={() =>
-                scrollToSection(projectsRef, (12 * window.innerHeight) / 100)
-              }
+              onClick={() => navigate("/websites")}
               className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/5 hover:bg-transparent transition-all duration-300 backdrop-blur-md shadow-[inset_0.6px_0.7px_3px_rgba(255,255,255,0.2)] sm:shadow-[inset_0.6px_0.3px_0px_rgba(255,255,255,0.6)] "
             >
-              Projects
-            </button>
-            <button
-              onClick={() => scrollToSection(contactRef)}
-              className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/5 hover:bg-transparent transition-all duration-300 backdrop-blur-md shadow-[inset_0.6px_0.7px_3px_rgba(255,255,255,0.2)] sm:shadow-[inset_0.6px_0.3px_0px_rgba(255,255,255,0.6)] "
-            >
-              Contact
+              Web-Portfolio
             </button>
             <a
               href={`${baseURL}/docs/CV - Diogo Piteira Castelos.pdf`}
