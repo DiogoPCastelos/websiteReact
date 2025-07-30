@@ -130,7 +130,6 @@ const Websites = () => {
                   }}
                   className="w-3 h-3 cursor-pointer rounded-full bg-red-500/80 hover:bg-red-600 transition-colors"
                 />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <div
                   onClick={() => {
                     setActiveUrl("chrome://newtab");
