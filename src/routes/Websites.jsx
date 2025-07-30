@@ -16,6 +16,12 @@ const Websites = () => {
       color: "from-blue-500 to-teal-300",
     },
     {
+      name: "Innovation Week webapp 2025",
+      url: "https://iw25.innova.pt",
+      icon: "💡",
+      color: "from-purple-500 to-purple-300",
+    },
+    {
       name: "Striking Media",
       url: "https://media.striking.pt",
       icon: "📸",
