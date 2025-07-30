@@ -106,7 +106,7 @@ const Websites = () => {
               animate="animate"
             />
             <motion.div
-              className="relative text-5xl md:text-7xl font-extrabold tracking-wide"
+              className="relative text-5xl md:text-7xl font-extrabold tracking-wide text-center break-words px-4 max-w-full"
               variants={textVariants}
               initial="initial"
               animate="animate"
