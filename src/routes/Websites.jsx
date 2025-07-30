@@ -136,7 +136,7 @@ const Websites = () => {
                     setActiveUrl("chrome://newtab");
                     setLoading(false);
                   }}
-                  className="w-3 h-3 cursor-pointer rounded-full bg-green-500/80"
+                  className="w-3 h-3 cursor-pointer rounded-full bg-green-500/80 hover:bg-green-700"
                 />
               </div>
               <div className="flex-1 bg-white/70 backdrop-blur-sm rounded-full px-3 py-1 text-sm text-slate-700 border border-slate-300/50 truncate">
