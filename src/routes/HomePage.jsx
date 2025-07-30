@@ -168,7 +168,7 @@ function HomePage() {
           <div className="relative z-10 flex space-x-2 sm:space-x-8 text-base font-semibold text-white">
             <button
               onClick={() => navigate("/websites")}
-              className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/5 hover:bg-transparent transition-all duration-300 backdrop-blur-md shadow-[inset_0.6px_0.7px_3px_rgba(255,255,255,0.2)] sm:shadow-[inset_0.6px_0.3px_0px_rgba(255,255,255,0.6)] "
+              className="text-sm md:text-xl px-4 py-2 rounded-xl bg-white/5 hover:bg-transparent transition-all duration-300 backdrop-blur-md shadow-[inset_0.6px_0.7px_3px_rgba(255,255,255,0.2)] sm:shadow-[inset_0.6px_0.7px_0px_rgba(255,255,255,0.6)] "
             >
               Web-Portfolio
             </button>
