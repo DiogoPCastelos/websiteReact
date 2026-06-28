@@ -41,7 +41,7 @@ function HomePage() {
       if (newState) {
         setTimeout(
           () => scrollToSection(aboutRef, (12 * window.innerHeight) / 100),
-          300
+          300,
         );
       }
       return newState;
@@ -66,7 +66,7 @@ function HomePage() {
       const width = window.innerWidth;
       const totalHeight = Math.max(
         document.documentElement.scrollHeight,
-        window.innerHeight
+        window.innerHeight,
       );
 
       const dpr = window.devicePixelRatio || 1;
@@ -113,7 +113,7 @@ function HomePage() {
           const twinkle = Math.sin(Date.now() * star.twinkleSpeed) * 0.5 + 0.5;
           ctx.fillStyle = star.color.replace(
             "1)",
-            `${star.brightness * twinkle})`
+            `${star.brightness * twinkle})`,
           );
           ctx.beginPath();
           ctx.arc(
@@ -121,7 +121,7 @@ function HomePage() {
             (yOffset + totalHeight) % totalHeight,
             star.size * (twinkle + 0.5),
             0,
-            Math.PI * 2
+            Math.PI * 2,
           );
           ctx.fill();
         });
