@@ -4,6 +4,7 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import HomePage from "./routes/HomePage";
 import Websites from "./routes/Websites";
+import Ideias from "./routes/Ideias";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -24,6 +25,7 @@ getAnalytics(app);
 const router = createHashRouter([
   { path: "/", element: <HomePage /> },
   { path: "/websites", element: <Websites /> },
+  { path: "/ideias", element: <Ideias /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
